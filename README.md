@@ -14,4 +14,29 @@ Find the info for the `.csv` file `data_info.csv` below:
 `n_zbands`: Number of Z-bands   
 `cell_mask_area`: Cell area [µm²]   
 `status`: labeled, unlabeled (whether the ground truth is provided or not)   
-`split`: train, test (whether the data was used as test or train)   
+`split`: train, test (whether the data was used as test or train)  
+
+-----
+## Project Background
+Write about stem cells, heart cells, matureness immatureness? why is it important to classify them into three groups
+
+## Project Roadmap  
+Installing requirements.    
+raw_folder -> features folder    
+using a list of names, we set test and train   
+using a list of features, we select features for test and train   
+scaling and all   
+clustering 
+comparing the gnd and reality   
+MAYBE YOU WANNA GO INTO SAMPLES ONE BY ONE JUST TO MAKE SURE?  
+
+## Installation Instructions
+What do you need? miniconda   
+how do you install that?  
+How do you setup the env? how to do you install requirements?
+
+## Files
+just make everything into one utils file
+
+## Tutorials
+
