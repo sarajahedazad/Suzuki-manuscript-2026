@@ -41,5 +41,5 @@ just make everything into one utils file
 ## Tutorials
 
 ## <span style="color: red;">Things to talk about using HTML.</span>  
-Because of conflicts between dependency versions, two conda/miniconda environments were created for this project. One with [SarcAsM](https://github.com/danihae/SarcAsM) installed on it, 
+Because of conflicts between dependency versions, two conda/miniconda environments were created for this project. One with [SarcAsM](https://github.com/danihae/SarcAsM) installed on it for feature extraction, the other one with [ExKMC](https://github.com/navefr/ExKMC?tab=readme-ov-file) installed on it for the cell grouping process.
 
