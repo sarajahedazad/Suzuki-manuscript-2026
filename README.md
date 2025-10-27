@@ -44,10 +44,18 @@ just make everything into one utils file
 Because of conflicts between dependency versions, two conda/miniconda environments were created for this project. One with [SarcAsM](https://github.com/danihae/SarcAsM) installed on it for feature extraction named `featextract-env`, the other one with [ExKMC](https://github.com/navefr/ExKMC?tab=readme-ov-file) (and other dependancies) installed on it for the cell grouping process named `featanalysis-env`.  
 ```
 module load miniconda
-mamba create --name myenv python=3.12 -y # maybe add -y at the end
-mamba activate myenv
+mamba create --name featextract-env python=3.12 -y 
+mamba activate featextract-env
 pip install sarc-asm
-```  
+```
+
+```
+mamba create -n myenv python=3.10 -y
+mamba activate myenv
+mamba install -y numpy=1.23 pandas matplotlib scikit-learn
+mamba install -y tifffile graphviz python-graphviz cython compilers
+pip install ExKMC
+```
     
 instruction for setting up envs   
 .py utils_file
