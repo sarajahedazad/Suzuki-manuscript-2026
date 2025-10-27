@@ -35,12 +35,6 @@ What do you need? miniconda
 how do you install that?  
 How do you setup the env? how to do you install requirements?
 
-## Files
-just make everything into one utils file
-
-## Tutorials
-
-## THINGS TO TALK ABOUT   
 Because of dependency version conflicts, two separate Conda/Miniconda environments were created for this project. One environment, named `featextract-env`, includes [SarcAsM](https://github.com/danihae/SarcAsM) for feature extraction. The other environment, named `featanalysis-env`, includes [ExKMC](https://github.com/navefr/ExKMC?tab=readme-ov-file) and its related dependencies for the cell grouping process.  
 ```
 module load miniconda
@@ -56,6 +50,16 @@ mamba install -y numpy=1.23 pandas matplotlib scikit-learn
 mamba install -y tifffile graphviz python-graphviz cython compilers
 pip install ExKMC
 ```
+**Note**: For deactivation of environments, use `mamba deactivate`.
+
+
+## Files
+just make everything into one utils file
+
+## Tutorials
+
+## THINGS TO TALK ABOUT   
+
     
 instruction for setting up envs   
 .py utils_file
