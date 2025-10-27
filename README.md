@@ -50,8 +50,8 @@ pip install sarc-asm
 ```
     
 ```
-mamba create -n myenv python=3.10 -y
-mamba activate myenv
+mamba create -n featanalysis-env python=3.10 -y
+mamba activate featanalysis-env
 mamba install -y numpy=1.23 pandas matplotlib scikit-learn
 mamba install -y tifffile graphviz python-graphviz cython compilers
 pip install ExKMC
