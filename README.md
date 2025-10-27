@@ -41,7 +41,13 @@ just make everything into one utils file
 ## Tutorials
 
   ## THINGS TO TALK ABOUT
-Because of conflicts between dependency versions, two conda/miniconda environments were created for this project. One with [SarcAsM](https://github.com/danihae/SarcAsM) installed on it for feature extraction, the other one with [ExKMC](https://github.com/navefr/ExKMC?tab=readme-ov-file) (and other dependancies) installed on it for the cell grouping process.
+Because of conflicts between dependency versions, two conda/miniconda environments were created for this project. One with [SarcAsM](https://github.com/danihae/SarcAsM) installed on it for feature extraction named `featextract-env`, the other one with [ExKMC](https://github.com/navefr/ExKMC?tab=readme-ov-file) (and other dependancies) installed on it for the cell grouping process named `featanalysis-env`.  
+```
+module load miniconda
+mamba create --name myenv python=3.12 -y # maybe add -y at the end
+mamba activate myenv
+pip install sarc-asm
+```  
     
 instruction for setting up envs   
 .py utils_file
