@@ -31,27 +31,44 @@ comparing the gnd and reality
 MAYBE YOU WANNA GO INTO SAMPLES ONE BY ONE JUST TO MAKE SURE?  
 
 ## Installation Instructions
-What do you need? miniconda   
-how do you install that?  
-How do you setup the env? how to do you install requirements?
+### Requirements
+You’ll need **Miniconda** (or **Anaconda**) installed on your system.
+If you already have **Conda**, you can use it instead of **Miniconda** and replace all `mamba` commands below with `conda`.
+  
+### Environment Setup
+Because of dependency version conflicts, two separate Conda/Miniconda environments were created for this project:  
+-`featextract-env`: includes [SarcAsM](https://github.com/danihae/SarcAsM) for feature extraction.    
+-`featanalysis-env`: includes [ExKMC](https://github.com/navefr/ExKMC?tab=readme-ov-file) and its related dependencies for the cell grouping process.  
 
-Because of dependency version conflicts, two separate Conda/Miniconda environments were created for this project. One environment, named `featextract-env`, includes [SarcAsM](https://github.com/danihae/SarcAsM) for feature extraction. The other environment, named `featanalysis-env`, includes [ExKMC](https://github.com/navefr/ExKMC?tab=readme-ov-file) and its related dependencies for the cell grouping process.  
+#### 1. Feature Extraction Environment
 ```
 module load miniconda
 mamba create --name featextract-env python=3.12 -y 
 mamba activate featextract-env
 pip install sarc-asm
 ```
-    
+   
+#### 2. Feature Analysis Environment
 ```
+module load miniconda
 mamba create -n featanalysis-env python=3.10 -y
 mamba activate featanalysis-env
 mamba install -y numpy=1.23 pandas matplotlib scikit-learn
 mamba install -y tifffile graphviz python-graphviz cython compilers
 pip install ExKMC
 ```
-**Note**: For deactivation of environments, use `mamba deactivate`.
+**Note**: For deactivation of environments, use:   
+`
+mamba deactivate
+`
+### Using the Environment in VS Code
+If you are using VS Code:
 
+1. Open the project folder in VS Code.
+2. Make sure the **Python** and **Jupyter** extensions are installed (you can find them in the Extensions tab).
+3. Open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P` on macOS).
+4. Search for “Python: Select Interpreter”.
+5. Choose the environment you created (e.g., featextract-env or featanalysis-env).
 
 ## Files
 just make everything into one utils file
