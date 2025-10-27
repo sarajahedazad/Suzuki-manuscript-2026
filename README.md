@@ -41,6 +41,7 @@ Because of dependency version conflicts, two separate Conda/Miniconda environmen
 -`featanalysis-env`: includes [ExKMC](https://github.com/navefr/ExKMC?tab=readme-ov-file) and its related dependencies for the cell grouping process.  
 
 #### 1. Feature Extraction Environment
+Write the following commands in your terminal.
 ```
 module load miniconda
 mamba create --name featextract-env python=3.12 -y 
@@ -49,6 +50,7 @@ pip install sarc-asm
 ```
    
 #### 2. Feature Analysis Environment
+Write the following commands in your terminal.
 ```
 module load miniconda
 mamba create -n featanalysis-env python=3.10 -y
@@ -61,6 +63,7 @@ pip install ExKMC
 `
 mamba deactivate
 `
+After creation of the first env, deactivate it and create the next. 
 ### Using the Environment in VS Code
 If you are using VS Code:
 
