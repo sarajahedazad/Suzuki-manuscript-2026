@@ -30,7 +30,7 @@ clustering
 comparing the gnd and reality   
 MAYBE YOU WANNA GO INTO SAMPLES ONE BY ONE JUST TO MAKE SURE?  
 
-## Installation Instructions
+## Step 0-a: Installation Instructions
 ### Requirements
 You’ll need **Miniconda** (or **Anaconda**) installed on your system.
 If you already have **Conda**, you can use it instead of **Miniconda** and replace all `mamba` commands below with `conda`.
@@ -73,6 +73,15 @@ If you are using VS Code:
 4. Search for “Python: Select Interpreter”.
 5. Choose the environment you created (e.g., featextract-env or featanalysis-env).
 
+------------------
+## Step 0-b: Setting up Folder Directories and Assigning Test-Train Data  
+In this step 
+
+## Step 1: Feature Extraction  
+
+
+## Step 2: Feature Analysis and Saving Results
+
 ## Files
 just make everything into one utils file
 
@@ -82,8 +91,9 @@ just make everything into one utils file
 
     
 instruction for setting up envs   
-.py utils_file
-.csv file for the names and gnd
+.py utils_file   
+.csv file for the names and gnd  
+.csv file for the names and gnd test and train are also added
 .py file for feature extraction   
 .py file for grouping them and visualizing 
 .csv file for the names and pred
