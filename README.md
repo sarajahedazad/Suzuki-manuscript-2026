@@ -1,43 +1,4 @@
 # Kazuya's Data
-
-## Description of Files   
-### ` metadata_base.csv `
-This file contains basic information about all samples.  
-**Columns**:  
-- `name`: names of samples  
-- `group_gnd`: 0, 1, 2 , NaN (ground truth. In case the data is not labeled, it will be NaN.)  
-- `sheet`: 01_FN, 02_VN, 03_FN_P5D2, 04_VN_P5D2, 05_FN_Cilen100, 06_VN_Cilen100,old_data, old_data_unlabeled (This column indicates the folder to which the data originally belongs)
-- `status`: labeled, unlabeled (whether the ground truth is provided or not)   
-### ` metadata_split.csv `
-In this `.csv` file, test and train data are determined. All the columns are the same as `metadata_base.csv', plus another column called 'split'.
-`split`: train, test (whether the data was used as test or train)  
-### ` metadata_features.csv `
-Includes all the columns in `metadata_split.csv` plus the prediction information and some of the selected extracted features.
-`group_pred`: 0, 1, 2 (predicted group)   
-`sarcomere_length_mean`: Mean sarcomere length [µm]   
-`sarcomere_length_std`: Average sarcomere length [µm]    
-`sarcomere_area_ratio`: Ratio of cell mask area occupied by sarcomeres.   
-`z_length_mean`: Mean Z-band length [µm]   
-`n_zbands`: Number of Z-bands   
-`cell_mask_area`: Cell area [µm²]   
-
-## data_info.csv
-Find the info for the `.csv` file `data_info.csv` below:    
-**Columns**   
-`name`: names of samples  
-`group_pred`: 0, 1, 2 (predicted group)    
-`group_gnd`: 0, 1, 2 , NaN (ground truth. In case the data is not labeled, it will be NaN. )     
-`sheet`: 01_FN, 02_VN, 03_FN_P5D2, 04_VN_P5D2, 05_FN_Cilen100, 06_VN_Cilen100,old_data, old_data_unlabeled (This column indicates the folder to which the data originally belongs)   
-`sarcomere_length_mean`: Mean sarcomere length [µm]   
-`sarcomere_length_std`: Average sarcomere length [µm]    
-`sarcomere_area_ratio`: Ratio of cell mask area occupied by sarcomeres.   
-`z_length_mean`: Mean Z-band length [µm]   
-`n_zbands`: Number of Z-bands   
-`cell_mask_area`: Cell area [µm²]   
-`status`: labeled, unlabeled (whether the ground truth is provided or not)   
-`split`: train, test (whether the data was used as test or train)  
-
------
 ## Project Background
 Write about stem cells, heart cells, matureness immatureness? why is it important to classify them into three groups
 
@@ -50,6 +11,31 @@ scaling and all
 clustering 
 comparing the gnd and reality   
 MAYBE YOU WANNA GO INTO SAMPLES ONE BY ONE JUST TO MAKE SURE?  
+
+-----
+
+## Description of Files   
+### ` metadata_base.csv `
+This file contains basic information about all samples.  
+**Columns**:  
+- `name`: names of samples  
+- `group_gnd`: 0, 1, 2 , NaN (ground truth. In case the data is not labeled, it will be NaN.)  
+- `sheet`: 01_FN, 02_VN, 03_FN_P5D2, 04_VN_P5D2, 05_FN_Cilen100, 06_VN_Cilen100,old_data, old_data_unlabeled (This column indicates the folder to which the data originally belongs)
+- `status`: labeled, unlabeled (whether the ground truth is provided or not)   
+### ` metadata_split.csv `
+This file includes all columns from `metadata_base.csv`, plus an additional column defining the train/test split.   
+- `split`: train, test (whether the data was used as test or train)  
+### ` metadata_features.csv `
+This file extends `metadata_split.csv` by adding prediction results and selected extracted features.   
+- `group_pred`: 0, 1, 2 (predicted group)   
+- `sarcomere_length_mean`: Mean sarcomere length [µm]   
+- `sarcomere_length_std`: Average sarcomere length [µm]    
+- `sarcomere_area_ratio`: Ratio of cell mask area occupied by sarcomeres.   
+- `z_length_mean`: Mean Z-band length [µm]   
+- `n_zbands`: Number of Z-bands   
+- `cell_mask_area`: Cell area [µm²]   
+
+-----
 
 ## Step 0-a: Installation Instructions
 ### Requirements
