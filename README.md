@@ -24,9 +24,11 @@ This file contains basic information about all samples.
 - `status`: labeled, unlabeled (whether the ground truth is provided or not)   
 ### ` metadata_split.csv `
 This file includes all columns from `metadata_base.csv`, plus an additional column defining the train/test split.   
+**Additional Columns**:
 - `split`: train, test (whether the data was used as test or train)  
 ### ` metadata_features.csv `
-This file extends `metadata_split.csv` by adding prediction results and selected extracted features.   
+This file extends `metadata_split.csv` by adding prediction results and selected extracted features.  
+**Additional Columns**:  
 - `group_pred`: 0, 1, 2 (predicted group)   
 - `sarcomere_length_mean`: Mean sarcomere length [µm]   
 - `sarcomere_length_std`: Average sarcomere length [µm]    
