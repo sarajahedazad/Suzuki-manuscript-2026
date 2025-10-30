@@ -1,5 +1,9 @@
 # Kazuya-s-Data
 
+## Description of Files   
+`metadata_base.csv`  
+`metadata_split.csv`   
+`metadata_features.csv`   
 ## data_info.csv
 Find the info for the `.csv` file `data_info.csv` below:    
 **Columns**   
