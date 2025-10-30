@@ -35,7 +35,9 @@ This file extends `metadata_split.csv` by adding prediction results and selected
 - `sarcomere_area_ratio`: Ratio of cell mask area occupied by sarcomeres.   
 - `z_length_mean`: Mean Z-band length [µm]   
 - `n_zbands`: Number of Z-bands   
-- `cell_mask_area`: Cell area [µm²]   
+- `cell_mask_area`: Cell area [µm²]
+
+.py files
 
 -----
 
