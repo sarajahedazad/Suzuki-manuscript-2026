@@ -57,7 +57,9 @@ Write the following commands in your terminal.
 module load miniconda
 mamba create --name featextract-env python=3.12 -y 
 mamba activate featextract-env
-pip install sarc-asm
+pip install sarc-asm   
+mamba install -y imagecodecs   
+mamba install numpy=2.2 -y   
 ```
    
 #### 2. Feature Analysis Environment
