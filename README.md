@@ -12,6 +12,13 @@ clustering
 comparing the gnd and reality   
 MAYBE YOU WANNA GO INTO SAMPLES ONE BY ONE JUST TO MAKE SURE?  
 
+### csv_files folder  
+explain the the content 
+
+### Codes  
+
+### Figures Folder  
+
 -----
 
 ## Description of Files   
