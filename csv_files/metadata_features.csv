@@ -1,4 +1,4 @@
-name,group_gnd,sheet,status,split,group_pred,sarcomere_length_mean,sarcomere_length_std,sarcomere_area_ratio,z_length_mean,n_zbands,cell_mask_area
+name,group_gnd,orig_folder,status,split,group_pred,sarcomere_length_mean,sarcomere_length_std,sarcomere_area_ratio,z_length_mean,n_zbands,cell_mask_area
 114124_3602_w2FITC-C_1,,old_data_unlabeled,unlabeled,train,1.0,1.2946798104667818,0.248240522819538,0.0737210196990962,0.5625,8.0,255.6225
 114124_3661_w2FITC-C_1,,old_data_unlabeled,unlabeled,train,0.0,0.0,0.0,0.0015738774058711,0.3,1.0,682.0425
 040325_4534_w2FITC-C_2,0.0,05_FN_Cilen100,labeled,test,0.0,1.4806471510355643,0.2877806065183514,0.0460918138781819,0.5302325581395348,43.0,1735.515
