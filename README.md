@@ -12,6 +12,8 @@ clustering
 comparing the gnd and reality   
 MAYBE YOU WANNA GO INTO SAMPLES ONE BY ONE JUST TO MAKE SURE?  
 
+### Directories
+
 ### csv_files folder  
 explain the the content 
 
