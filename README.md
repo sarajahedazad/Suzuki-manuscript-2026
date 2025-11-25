@@ -10,7 +10,7 @@ using a list of features, we select features for test and train
 scaling and all   
 clustering 
 comparing the gnd and reality   
-MAYBE YOU WANNA GO INTO SAMPLES ONE BY ONE JUST TO MAKE SURE?  
+
 
 ### Folders
 #### csv_files folder  
@@ -59,21 +59,24 @@ This file extends `metadata_split.csv` by adding prediction results and selected
 - `n_zbands`: Number of Z-bands   
 - `cell_mask_area`: Cell area [µm²]
 
-.py files
+### `step1_feature_extraction.py`   
+### `step2_metadata_split.py`   
+### `step3_analysis_and_metadata_features.ipynb`  
+### `utils.py`  
 
------
-
-## Step 0-a: Installation Instructions
+-----------
+-----------
+## Step 0-a: Installation instructions
 ### Requirements
 You’ll need **Miniconda** (or **Anaconda**) installed on your system.
 If you already have **Conda**, you can use it instead of **Miniconda** and replace all `mamba` commands below with `conda`.
   
-### Environment Setup
+### Environment setup
 Because of dependency version conflicts, two separate Conda/Miniconda environments were created for this project:  
 -`featextract-env`: includes [SarcAsM](https://github.com/danihae/SarcAsM) for feature extraction.    
 -`featanalysis-env`: includes [ExKMC](https://github.com/navefr/ExKMC?tab=readme-ov-file) and its related dependencies for the cell grouping process.  
 
-#### 1. Feature Extraction Environment
+#### 1. Feature extraction environment
 Write the following commands in your terminal.
 ```
 module load miniconda
@@ -84,7 +87,7 @@ mamba install -y imagecodecs
 mamba install numpy=2.2 -y   
 ```
    
-#### 2. Feature Analysis Environment
+#### 2. Feature analysis environment
 Write the following commands in your terminal.
 ```
 module load miniconda
@@ -99,7 +102,7 @@ pip install ExKMC --no-build-isolation
 mamba deactivate
 `
 After creation of the first env, deactivate it and create the next. 
-### Using the Environment in VS Code
+### Using the environment in VS code
 If you are using VS Code:
 
 1. Open the project folder in VS Code.
@@ -109,27 +112,19 @@ If you are using VS Code:
 5. Choose the environment you created (e.g., featextract-env or featanalysis-env).
 
 ------------------
-## Step 0-b: Setting up Folder Directories and Assigning Test-Train Data  
-In this step 
+## Step 1: Feature extraction   
+In this step, data are read from the raw data fodler `dataset`, they go through feature extraction in csv . In this step, the csv file `metadata_base.csv` is used to get the names of the files.
+**code file corresponding to this step**: `step1_feature_extraction.py`
 
-## Step 1: Feature Extraction  
+## Step 2: Setting test and train 
+Test and train data are assigned in this step and the `metadata_split.csv` file is geenrated.
+**code file corresponding to this step**: `step2_metadata_split.py`
+
+## Step 3: Feature analysis and saving results
+**code file corresponding to this step**: `step3_analysis_and_metadata_features.ipynb`
 
 
-## Step 2: Feature Analysis and Saving Results
+## References  
 
-## Files
-just make everything into one utils file
 
-## Tutorials
-
-## THINGS TO TALK ABOUT   
-
-    
-instruction for setting up envs   
-.py utils_file   
-.csv file for the names and gnd  
-.csv file for the names and gnd test and train are also added
-.py file for feature extraction   
-.py file for grouping them and visualizing 
-.csv file for the names and pred
 
