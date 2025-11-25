@@ -2,7 +2,15 @@
 ## Table of contents
 - [Project background]( #background )
 - [Project roadmap]( #roadmap )
-- [Folders](#folders)
+- [Description of folders](#folders)
+- [Description of files](#files)
+- [Installation instructions](#step0)
+- [Workflow](#workflow)
+    - [Step 1: Feature extraction](#step1)
+    - [Step 2: Setting test and train](#step2)
+    - [Step 3: Feature analysis and saving results](#step3)
+- [Reproducing the results](#reproduce)
+- [References](#references)
 
 ## Project background   <a name="background"></a>
 Write about stem cells, heart cells, matureness immatureness? why it is important to classify them into three groups
@@ -16,7 +24,7 @@ scaling and all
 clustering 
 comparing the gnd and reality   
 
-### Folders
+### Description of folders <a name="folders"></a> 
 #### csv_files folder  
 This folder contains the metadata used in this project, stored as `.csv` files.  
 
@@ -36,11 +44,11 @@ If an error occurs during feature extraction, a `.txt` file with the sample ID i
 
 ### Codes  
 
-### Figures Folder  
+### Figures folder  
 
 -----
 
-## Description of Files   
+## Description of files <a name="files"></a>    
 ### ` metadata_base.csv `
 This file contains basic information about all samples.  
 **Columns**:  
@@ -70,7 +78,7 @@ This file extends `metadata_split.csv` by adding prediction results and selected
 
 -----------
 -----------
-## Step 0-a: Installation instructions
+## Installation instructions <a name="step0"></a>    
 ### Requirements
 You’ll need **Miniconda** (or **Anaconda**) installed on your system.
 If you already have **Conda**, you can use it instead of **Miniconda** and replace all `mamba` commands below with `conda`.
@@ -116,17 +124,19 @@ If you are using VS Code:
 5. Choose the environment you created (e.g., featextract-env or featanalysis-env).
 
 ------------------
-## Step 1: Feature extraction   
+## Workflow
+### Step 1: Feature extraction   <a name="step1"></a>    
 In this step, data are read from the raw data fodler `dataset`, they go through feature extraction in csv . In this step, the csv file `metadata_base.csv` is used to get the names of the files.
 **code file corresponding to this step**: `step1_feature_extraction.py`
 
-## Step 2: Setting test and train 
+### Step 2: Setting test and train <a name="step2"></a>    
 Test and train data are assigned in this step and the `metadata_split.csv` file is geenrated.
 **code file corresponding to this step**: `step2_metadata_split.py`
 
-## Step 3: Feature analysis and saving results
+### Step 3: Feature analysis and saving results <a name="step3"></a>    
 **code file corresponding to this step**: `step3_analysis_and_metadata_features.ipynb`
 
+## Reproducing the results <a name="reproduce"></a> 
 
 ## References  
 
