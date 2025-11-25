@@ -1,11 +1,13 @@
+# Kazuya's Data
 ## Table of contents
 - [Project background]( #background )
+- [Project roadmap]( #roadmap )
+- [Folders](#folders)
 
-# Kazuya's Data
 ## Project background   <a name="background"></a>
-Write about stem cells, heart cells, matureness immatureness? why is it important to classify them into three groups
+Write about stem cells, heart cells, matureness immatureness? why it is important to classify them into three groups
 
-## Project roadmap  
+## Project roadmap  <a name="roadmap"></a> 
 Installing requirements.    
 raw_folder -> features folder    
 using a list of names, we set test and train   
@@ -13,7 +15,6 @@ using a list of features, we select features for test and train
 scaling and all   
 clustering 
 comparing the gnd and reality   
-
 
 ### Folders
 #### csv_files folder  
