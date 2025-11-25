@@ -24,31 +24,26 @@ scaling and all
 clustering 
 comparing the gnd and reality   
 
-### Description of folders <a name="folders"></a> 
-#### csv_files folder  
+## Description of folders <a name="folders"></a> 
+### csv_files folder  
 This folder contains the metadata used in this project, stored as `.csv` files.  
 
-#### figures folder   
+### Figures folder   
 Generated figures and visual results are saved in this folder.
 
-#### dataset folder (not on GitHub)  
+### dataset folder (not on GitHub)  
 This folder contains the raw data.
 It includes `.tif` files for the raw images and additional folders named after each sample ID.
 The feature-extraction tool used in this project, **SarcAsM**, automatically creates a folder for each sample (named after the sample ID) and stores intermediate outputs such as `cell_mask.tif`, `mbands.tif`, `zbands.tif`, etc.
 
-#### dataset_sarcasm_features folder (not on GitHub)   
+### dataset_sarcasm_features folder (not on GitHub)   
 This folder contains the extracted features from **SarcAsM**, saved as `.csv` files (one per sample).
 
-#### dataset_abnormal_samples folder (not on GitHub) 
-If an error occurs during feature extraction, a `.txt` file with the sample ID is stored here. Each file contains the error message for that sample.
+### dataset_abnormal_samples folder (not on GitHub) 
+If an error occurs during feature extraction, a `.txt` file with the sample ID is stored here. Each file contains the error message for that sample.  
 
-### Codes  
 
-### Figures folder  
-
------
-
-## Description of files <a name="files"></a>    
+## Description of key files <a name="files"></a>    
 ### ` metadata_base.csv `
 This file contains basic information about all samples.  
 **Columns**:  
@@ -71,13 +66,18 @@ This file extends `metadata_split.csv` by adding prediction results and selected
 - `n_zbands`: Number of Z-bands   
 - `cell_mask_area`: Cell area [µm²]
 
-### `step1_feature_extraction.py`   
+### `step1_feature_extraction.py`  
+Extracts structural features from the raw .tif images using the SarcAsM pipeline.
+This script reads the input dataset, runs feature-extraction for each sample, and saves the resulting feature files.   
 ### `step2_metadata_split.py`   
+Creates a train/test split based on the metadata.
+This script loads the base metadata file (`metadata_base.csv`), assigns each sample to the train or test set (following predefined rules), and saves the updated metadata as `metadata_split.csv`.  
 ### `step3_analysis_and_metadata_features.ipynb`  
+A Jupyter notebook for analyzing the extracted features and generating the final results.
+It loads `metadata_split.csv` and the feature files, performs the analysis, creates visualizations, and saves outputs such as `metadata_features.csv` and various figures. 
 ### `utils.py`  
+Contains helper functions used across different scripts in the project.
 
------------
------------
 ## Installation instructions <a name="step0"></a>    
 ### Requirements
 You’ll need **Miniconda** (or **Anaconda**) installed on your system.
