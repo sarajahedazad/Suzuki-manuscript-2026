@@ -205,7 +205,9 @@ def relabel_by_mean(X, y, reverse=False, custom_order=None):
 #--------Visualization and evaluation functions-------
 #-----------------------------------------------------
 
-def plot_clusters(pca_fit, predictions, title='', saving_dir=None):
+def plot_clusters(pca_fit, predictions, title='', saving_dir=None, label_map = {0: 'l', 1: 'm', 2: 'h'}):
+    ''' label_map-> Map cluster labels → short text labels '''
+
     # Define colors for each predicted class
     colors_dict = {
         "yellow": "#FEEE78",
@@ -218,13 +220,6 @@ def plot_clusters(pca_fit, predictions, title='', saving_dir=None):
         0: colors_dict["yellow"],
         1: colors_dict["gray"],
         2: colors_dict["navy"],
-    }
-
-    # Map cluster labels → short text labels
-    label_map = {
-        0: "l",
-        1: "m",
-        2: "h",
     }
 
     # Scatter-plot PCA points by predicted class
@@ -317,7 +312,7 @@ def evaluate_from_confusion(cm, title, class_labels=(0, 1, 2)):
 
     return cm_df, overall, per_class
 
-def plot_pca_matches(features_pca, labels_gnd, labels_pred, ax=None, title="Ground Truth vs Predicted Labels"):
+def plot_pca_matches(features_pca, labels_gnd, labels_pred, title="Ground truth vs predicted labels", saving_dir = None):
     """
     Scatter PCA[:,0] vs PCA[:,1]. Green = y_true==y_pred, Red = mismatch.
     Works whether inputs are lists, numpy arrays, or pandas objects.
@@ -336,10 +331,8 @@ def plot_pca_matches(features_pca, labels_gnd, labels_pred, ax=None, title="Grou
     matches = (y_true == y_pred)
 
     # Set up axes
-    created_ax = False
-    if ax is None:
-        fig, ax = plt.subplots(figsize=(6, 6))
-        created_ax = True
+    fig, ax = plt.subplots(figsize=(6, 6))
+
 
     # Plot
     ax.scatter(X[matches, 0], X[matches, 1],
@@ -355,11 +348,13 @@ def plot_pca_matches(features_pca, labels_gnd, labels_pred, ax=None, title="Grou
     ax.set_title(title)
     ax.legend()
 
-    if created_ax:
-        plt.tight_layout()
-        plt.show()
 
-    return ax
+    plt.tight_layout()
+    # Save figure if path provided
+    if saving_dir:
+        plt.savefig(saving_dir, dpi=400)
+
+    plt.show()
 
 def samples_by_label_pair(y_true, y_pred, X, labels=None, include_empty=False):
     # Convert inputs to arrays
@@ -439,5 +434,3 @@ def plot_gndvspred(pair_key, sample_id, raw_folder_dir,
     axes[2].imshow(zdiscs, cmap='gray')
     axes[2].set_title("Zdiscs")
     axes[2].axis("off")
-
-

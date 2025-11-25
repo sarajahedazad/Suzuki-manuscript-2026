@@ -12,10 +12,23 @@ clustering
 comparing the gnd and reality   
 MAYBE YOU WANNA GO INTO SAMPLES ONE BY ONE JUST TO MAKE SURE?  
 
-### Directories
+### Folders
+#### csv_files folder  
+This folder contains the metadata used in this project, stored as `.csv` files.  
 
-### csv_files folder  
-explain the the content 
+#### figures folder   
+Generated figures and visual results are saved in this folder.
+
+#### dataset folder (not on GitHub)  
+This folder contains the raw data.
+It includes `.tif` files for the raw images and additional folders named after each sample ID.
+The feature-extraction tool used in this project, **SarcAsM**, automatically creates a folder for each sample (named after the sample ID) and stores intermediate outputs such as `cell_mask.tif`, `mbands.tif`, `zbands.tif`, etc.
+
+#### dataset_sarcasm_features folder (not on GitHub)   
+This folder contains the extracted features from **SarcAsM**, saved as `.csv` files (one per sample).
+
+#### dataset_abnormal_samples folder (not on GitHub) 
+If an error occurs during feature extraction, a `.txt` file with the sample ID is stored here. Each file contains the error message for that sample.
 
 ### Codes  
 
