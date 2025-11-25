@@ -1,8 +1,11 @@
+## Table of contents
+- [Project background]( #background )
+
 # Kazuya's Data
-## Project Background
+## Project background   <a name="background"></a>
 Write about stem cells, heart cells, matureness immatureness? why is it important to classify them into three groups
 
-## Project Roadmap  
+## Project roadmap  
 Installing requirements.    
 raw_folder -> features folder    
 using a list of names, we set test and train   
