@@ -9,7 +9,6 @@
     - [Step 1: Feature extraction](#step1)
     - [Step 2: Setting test and train](#step2)
     - [Step 3: Feature analysis and saving results](#step3)
-- [Reproducing the results](#reproduce)
 - [References](#references)
 
 ## Project background   <a name="background"></a>
@@ -44,18 +43,18 @@ If an error occurs during feature extraction, a `.txt` file with the sample ID i
 
 
 ## Description of key files <a name="files"></a>    
-### ` metadata_base.csv `
+### ` metadata_base.csv `<a name="metadatabase"></a>    
 This file contains basic information about all samples.  
 **Columns**:  
 - `name`: names of samples  
 - `group_gnd`: 0, 1, 2 , NaN (ground truth. In case the data is not labeled, it will be NaN.)  
 - `orig_folder`: 01_FN, 02_VN, 03_FN_P5D2, 04_VN_P5D2, 05_FN_Cilen100, 06_VN_Cilen100, old_data, old_data_unlabeled, data_nov (This column indicates the folder to which the data originally belongs)
 - `status`: labeled, unlabeled (whether the ground truth is provided or not)   
-### ` metadata_split.csv `
+### ` metadata_split.csv ` <a name="metadatasplit"></a>    
 This file includes all columns from `metadata_base.csv`, plus an additional column defining the train/test split.   
 **Additional Columns**:
 - `split`: train, test (whether the data was used as test or train)  
-### ` metadata_features.csv `
+### ` metadata_features.csv ` <a name="metadatafeats"></a>    
 This file extends `metadata_split.csv` by adding prediction results and selected extracted features.  
 **Additional Columns**:  
 - `group_pred`: 0, 1, 2 (predicted group)   
@@ -125,6 +124,7 @@ If you are using VS Code:
 
 ------------------
 ## Workflow
+
 ### Step 1: Feature extraction   <a name="step1"></a>    
 In this step, data are read from the raw data fodler `dataset`, they go through feature extraction in csv . In this step, the csv file `metadata_base.csv` is used to get the names of the files.
 **code file corresponding to this step**: `step1_feature_extraction.py`
@@ -136,8 +136,15 @@ Test and train data are assigned in this step and the `metadata_split.csv` file 
 ### Step 3: Feature analysis and saving results <a name="step3"></a>    
 **code file corresponding to this step**: `step3_analysis_and_metadata_features.ipynb`
 
-## Reproducing the results <a name="reproduce"></a> 
+### Going through steps
+For step 1 use `featextract-env` anf for step 2 & step 3 use `featanalysis-env`. **Do not forget to alter the directories in each file based on the directories in your computer.** 
 
+For feature extraction in **step 1**, you need a folder of cardiomyocyte images in `.tif` format.
+
+For running step 2 (the train–test split), you also need a .csv file similar to [metadata_base.csv](#metadatabase), with at least a column named `name` and another column named `group_gnd`. In our case, we also had a column called `orig_folder`, which we used to decide the train and test samples. You can change this part if you want to use a different method to split the data(like random splot, for example). Just be careful: for the train set you don’t necessarily need the ground truth, but for the test set you do, so only select labeled samples for test.
+```
+
+```
 ## References  
 
 
