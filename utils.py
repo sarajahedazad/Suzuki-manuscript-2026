@@ -104,13 +104,13 @@ def predict_classes_train(features_scaled, features_pca, random_state=1, split_l
         predictions_relabeled[mask] = predictions_relabeled_sliced
 
         return predictions_relabeled, kmeans, tree
-def predict_classes_test(kmeans, tree, features_scaled, features_pca, random_state=1,
+def predict_classes_test( tree, features_scaled, features_pca, random_state=1,
                          split_loworg=False, idxs_loworg=None, reverse=False,
                          custom_order=None, loworg_label=0, features_title=''):
 
     if split_loworg != True:
-        # Predict cluster IDs using trained tree + kmeans
-        predictions = tree.predict(features_scaled, kmeans).astype(np.int64)
+        # Predict cluster IDs using trained tree
+        predictions = tree.predict(features_scaled).astype(np.int64)
 
         # Relabel based on PCA order (lowest mean PC1 → 0, unless reversed/custom)
         predictions_relabeled = relabel_by_mean(features_pca[:, 0], predictions,

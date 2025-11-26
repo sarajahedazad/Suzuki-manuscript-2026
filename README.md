@@ -1,6 +1,6 @@
 # Kazuya's Data
 ## Table of contents
-- [Project background]( #background )
+- [Project overview]( #overview )
 - [Project roadmap]( #roadmap )
 - [Description of folders](#folders)
 - [Description of files](#files)
@@ -12,8 +12,12 @@
     - [Step 4: Analyzing results](#step4)
 - [References](#references)
 
-## Project background   <a name="background"></a>
-Write about stem cells, heart cells, matureness immatureness? why it is important to classify them into three groups
+## Project overview   <a name="overview"></a>
+Human induced pluripotent stem cell–derived cardiomyocytes (hiPSC-CMs) change significantly as they grow. Their internal structure varies across different stages of maturation. In this project, our goal is to group these cells into three categories: low, medium, and high organization, based on structural features extracted from their images.
+
+We used a deep-learning based open-source tool called SarcAsM to extract detailed structural features from each cell. After feature extraction, we applied K-means clustering to identify three groups in the data. Using the fitted K-means model and the extracted features, we then trained a decision tree to classify new samples into these groups.
+
+This workflow allows us to categorize large sets of hiPSC-CM images according to their level of internal structural organization.
 
 ## Project roadmap  <a name="roadmap"></a>   
 `Installing the required dependencies`↦`Extracting features`↦`Train and test split`↦`Fitting training data and evaluating`↦`Analyzing results`
@@ -26,7 +30,7 @@ This folder contains the metadata used in this project, stored as `.csv` files.
 Generated figures and visual results are saved in this folder.
 
 ### text_results folder
-Contains files in `.txt` format from the results of `step3_analysis_and_results.py`. These data, alongside with the information in ` metadata_features.csv `, are used in `results_visualization.ipynb` for visualization of results.
+Contains files in `.txt` format from the results of `step3_fit_and_eval.py`. These data, alongside with the information in ` metadata_features.csv `, are used in `step4_analyze_results.py` for analysing results, and in `results_visualization.ipynb` for visualization of results.
 
 ### dataset folder (not on GitHub)  
 This folder contains the raw data.
@@ -70,21 +74,26 @@ A Principal Component Analysis (PCA) model (with the first 2 components) was fit
 After scaling the test features using the train-fitted scaler and then applying the PCA fitted on the training data, the transformed test array is saved.
 `PC_train.txt` and `PC_test.txt` are used in visualizing clusters.
 
+### `utils.py`  
+Contains helper functions used across different scripts in the project.
+
 ### `step1_feature_extraction.py`  
 Extracts structural features from the raw .tif images using the SarcAsM pipeline.
-This script reads the input dataset, runs feature-extraction for each sample, and saves the resulting feature files.   
+This script reads the input dataset, runs feature-extraction for each sample, and saves the resulting feature files. 
+
 ### `step2_traintest_split.py`   
 Creates a train/test split based on the metadata.
 This script loads the base metadata file (`metadata_base.csv`), assigns each sample to the train or test set (following predefined rules), and saves the updated metadata as `metadata_split.csv`.  
+
 ### `step3_fit_and_eval.py`  
-A Jupyter notebook for analyzing the extracted features and generating the final results.
-It loads `metadata_split.csv` and the feature files, performs the analysis, creates visualizations, and saves outputs such as `metadata_features.csv` and various figures.   
+A `.py` file for fitting the model on the training data, evaluating it on the test data, and saving the results.  
+It loads `metadata_split.csv` and the feature files, performs the analysis, and generates outputs such as `metadata_features.csv`, `PC_train.txt`, and `PC_test.txt`.
+
 ### `step4_analyze_results.py`  
+This script loads the results from the previous steps, including `metadata_features.csv`, `PC_train.txt`, and `PC_test.txt`, and performs analyses such as generating confusion matrices and creating visualizations.
 
-### `utils.py`  
-Contains helper functions used across different scripts in the project.
 ### `results_visualization.ipynb`
-
+This Jupyter notebook is used for visualizing the same results generated in Step 4. It does not save any outputs; it is only used for visualization.
 
 ## Installation instructions <a name="step0"></a>    
 ### Requirements
@@ -165,6 +174,8 @@ python3 step4_analyze_results.py
 
 ```
 ## References  
-
+- [SarcAsM GitHub](https://github.com/danihae/SarcAsM)
+- [SarcAsM bioRxiv](https://www.biorxiv.org/content/10.1101/2025.04.29.650605v1)
+- [ExKMC bioRxiv](https://github.com/navefr/ExKMC?tab=readme-ov-file)
 
 

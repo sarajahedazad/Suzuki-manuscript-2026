@@ -106,7 +106,7 @@ test_features = get_selectedfeats_sarcasm( test_names, sarcasm_features_dir, raw
 test_features_scaled = scaler.transform(test_features)
 test_features_pca = pca.transform( test_features_scaled )
 
-test_pred = predict_classes_test( kmeans, tree, test_features_scaled, test_features_pca, random_state = SEED, split_loworg = split_loworg,
+test_pred = predict_classes_test( tree, test_features_scaled, test_features_pca, random_state = SEED, split_loworg = split_loworg,
                                idxs_loworg = test_idxs_loworg_sarcasm, reverse=reverse )
 
 # all samples
@@ -116,7 +116,7 @@ allsamples_features_scaled = scaler.transform(allsamples_features)
 allsamples_features_pca = pca.transform( allsamples_features_scaled )
 
 _, allsamples_idxs_loworg_sarcasm = get_loworg_sarcasm( allsamples_names, sarcasm_features_dir)
-allsamples_pred = predict_classes_test( kmeans, tree, allsamples_features_scaled, allsamples_features_pca, random_state = SEED, split_loworg = split_loworg,
+allsamples_pred = predict_classes_test( tree, allsamples_features_scaled, allsamples_features_pca, random_state = SEED, split_loworg = split_loworg,
                                idxs_loworg = allsamples_idxs_loworg_sarcasm, reverse=reverse )
 
 print( 'Prediction was done')
