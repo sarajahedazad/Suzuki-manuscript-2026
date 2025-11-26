@@ -26,11 +26,13 @@ np.random.seed(SEED)
 include_lst = ['sarcomere_area_ratio', 'z_length_mean', 'n_zbands']
 
 '''------Setting up directories------------'''
+#----Parent directories----
 dataset_parent_dir = '/projectnb/lejlab2/Sara/Second Project/kazuyas-data-project'
 csvfiles_parent_dir = ''
 figures_parent_dir = ''
 textresults_parent_dir = ''
 
+#----Folders---
 # Raw data folder
 raw_folder_name = 'dataset'
 raw_folder_dir = os.path.join(dataset_parent_dir, raw_folder_name)
@@ -43,13 +45,9 @@ sarcasm_features_dir = os.path.join(dataset_parent_dir, sarcasm_features_folder_
 print("Total number of data samples is:",
       len(get_filenames_fromfolder(sarcasm_features_dir, file_format="_features.csv")))
 
-# Folder for CSV metadata files
+# Folder for CSV files
 csvfiles_folder_name = 'csv_files'
 csvfiles_folder_dir = os.path.join(csvfiles_parent_dir, csvfiles_folder_name)
-
-# Paths to metadata CSV files
-metadata_split_csv_dir = os.path.join(csvfiles_folder_dir, 'metadata_split.csv')
-metadata_features_csv_dir  = os.path.join(csvfiles_folder_dir, 'metadata_features.csv')  # will be created later
 
 # Folder for figures
 figures_folder_name = 'figures'
@@ -60,6 +58,31 @@ os.makedirs( figures_folder_dir, exist_ok = True)
 textresults_folder_name = 'text_results'
 textresults_folder_dir = os.path.join(textresults_parent_dir, textresults_folder_name)
 os.makedirs( textresults_folder_dir, exist_ok = True)
+
+#----Directories for metadata---
+
+# Paths to metadata CSV files
+metadata_split_csv_dir = os.path.join(csvfiles_folder_dir, 'metadata_split.csv')
+metadata_features_csv_dir  = os.path.join(csvfiles_folder_dir, 'metadata_features.csv')  # will be created later
+
+#----Directories for analysis results---
+# Figures
+cluster_train_figure_dir = f'{figures_folder_dir}/clusters_train.png'
+cluster_test_figure_dir = f'{figures_folder_dir}/clusters_test.png'
+mismatches_test_figure_dir = f'{figures_folder_dir}/mismatch_test.png'
+cm_test_figure_dir = f'{figures_folder_dir}/cm_test.png'
+def get_gndvspred_figure_dir( figures_folder_dir, pair_key):
+      return f'{figures_folder_dir}/gnd{int(pair_key[0])}_pred{int(pair_key[1])}.png'
+
+# CSVs
+cm_test_csv_dir = 
+perclass_test_csv_dir = 
+summary_test_csv_dir = 
+
+# Txts
+PC_train_txt_dir =
+PC_test_txt_dir = 
+
 
 '''------Setting up test and train------------'''
 # Load train/test split metadata
@@ -76,7 +99,7 @@ _, train_idxs_loworg_sarcasm = get_loworg_sarcasm(train_names, sarcasm_features_
 
 # Test set: names + ground-truth labels + low-org indices
 test_names  = df_test['name'].to_list()
-test_labels = df_test['group_gnd'].to_list()
+test_labels = df_test['group_gnd'].to_numpy()
 _, test_idxs_loworg_sarcasm = get_loworg_sarcasm(test_names, sarcasm_features_dir)
 
 # All samples: for global low-org identification
@@ -124,10 +147,86 @@ allsamples_pred = predict_classes_test( kmeans, tree, allsamples_features_scaled
 '''----------------------------------------------'''
 '''-------------------Results--------------------'''
 '''----------------------------------------------'''
+# Analysis: confusion matrix
+cm_test = confusion_matrix(test_labels, test_pred, labels=[0, 1, 2])
 
 '''Figures'''
+# Clusters
+plot_clusters( train_features_pca,  train_pred, title = 'Train: group prediction', saving_dir = cluster_train_figure_dir)
+plot_clusters( test_features_pca,  test_pred, title = 'Test: group prediction', saving_dir = cluster_test_figure_dir)
+
+# Mismatches
+plot_pca_matches( test_features_pca, np.array( test_labels ), test_pred, title="Test: ground truth vs predicted labels", saving_dir = mismatches_test_figure_dir )
+
+# confustion matrix
+class_names = ['l', 'm', 'h']
+disp = ConfusionMatrixDisplay(confusion_matrix=cm_test, display_labels=class_names)
+plt.figure()
+disp.plot()
+disp.ax_.set(xlabel='prediction', ylabel='ground truth')
+plt.title("Confusion matrix (test data)")
+plt.savefig(cm_test_figure_dir, dpi = 400)
+
+#------------------
+# Grouping test samples by (true_label, pred_label), include empty pairs as well
+labelpairs_dict = samples_by_label_pair(test_labels, test_pred, test_names, include_empty=True)
+
+# Picking one random sample ID from each (true, pred) pair
+random_samples_dict = pick_random_per_pair(labelpairs_dict, seed = SEED)
+
+# Plotting the chosen sample for each pair (or reporting if none exist)
+for pair_key, sample_id in random_samples_dict.items():
+    if sample_id:
+        plot_gndvspred(pair_key, sample_id, raw_folder_dir, saving_dir = get_gndvspred_figure_dir( figures_folder_dir, pair_key))
+    else:
+        print( f'No samples for {pair_key} key')
 
 '''CSV file'''
+# Results as csv files
+
+
+#------------------metadata_features.csv----------------------
+# Additional features (beyond those used for prediction) are added here
+
+# Helper to extract a single feature value from a per-sample feature file
+def get_val(col, df_feat):
+    return df_feat[col].iloc[0]
+
+df_updated = df.copy()
+df_updated['group_pred'] = allsamples_pred # add predicted labels
+
+# Lists to store additional features
+sarcomere_length_mean_lst, sarcomere_length_std_lst, sarcomere_area_ratio_lst = [], [], []
+z_length_mean_lst, n_zbands_lst, cell_mask_area_lst = [], [], []
+
+# Read each per-sample feature file and collect desired fields
+for name in allsamples_names:
+    feat_file = os.path.join(sarcasm_features_dir, f'{name}_features.csv')
+    df_feat = pd.read_csv(feat_file)
+    sarcomere_length_mean = get_val('sarcomere_length_mean', df_feat)
+    sarcomere_length_std = get_val('sarcomere_length_std', df_feat)
+    sarcomere_area_ratio = get_val('sarcomere_area_ratio', df_feat)
+    z_length_mean = get_val('z_length_mean', df_feat)
+    n_zbands = get_val('n_zbands', df_feat)
+    cell_mask_area = get_val('cell_mask_area', df_feat)
+
+    sarcomere_length_mean_lst.append( sarcomere_length_mean )
+    sarcomere_length_std_lst.append( sarcomere_length_std)
+    sarcomere_area_ratio_lst.append( sarcomere_area_ratio)
+    z_length_mean_lst.append( z_length_mean)
+    n_zbands_lst.append( n_zbands)
+    cell_mask_area_lst.append( cell_mask_area)
+
+# Add extracted features to the metadata table
+df_updated['sarcomere_length_mean'] = sarcomere_length_mean_lst
+df_updated['sarcomere_length_std'] = sarcomere_length_std_lst
+df_updated['sarcomere_area_ratio'] = sarcomere_area_ratio_lst
+df_updated['z_length_mean'] = z_length_mean_lst
+df_updated['n_zbands'] = n_zbands_lst
+df_updated['cell_mask_area'] = cell_mask_area_lst
+
+# Save final metadata CSV
+df_updated.to_csv(metadata_features_csv_dir, index=False)
 
 '''Text files'''
 
