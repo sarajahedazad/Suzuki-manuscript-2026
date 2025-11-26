@@ -27,8 +27,11 @@ comparing the gnd and reality
 ### csv_files folder  
 This folder contains the metadata used in this project, stored as `.csv` files.  
 
-### Figures folder   
+### figures folder   
 Generated figures and visual results are saved in this folder.
+
+### text_results folder
+Contains files in `.txt` format from the results of `step3_analysis_and_results.py`. These data, alongside with the information in ` metadata_features.csv `, are used in `results_visualization.ipynb` for visualization of results.
 
 ### dataset folder (not on GitHub)  
 This folder contains the raw data.
@@ -68,14 +71,15 @@ This file extends `metadata_split.csv` by adding prediction results and selected
 ### `step1_feature_extraction.py`  
 Extracts structural features from the raw .tif images using the SarcAsM pipeline.
 This script reads the input dataset, runs feature-extraction for each sample, and saves the resulting feature files.   
-### `step2_metadata_split.py`   
+### `step2_traintest_split.py`   
 Creates a train/test split based on the metadata.
 This script loads the base metadata file (`metadata_base.csv`), assigns each sample to the train or test set (following predefined rules), and saves the updated metadata as `metadata_split.csv`.  
-### `step3_analysis_and_metadata_features.ipynb`  
+### `step3_analysis_and_results.py`  
 A Jupyter notebook for analyzing the extracted features and generating the final results.
 It loads `metadata_split.csv` and the feature files, performs the analysis, creates visualizations, and saves outputs such as `metadata_features.csv` and various figures. 
 ### `utils.py`  
 Contains helper functions used across different scripts in the project.
+### `results_visualization.ipynb`
 
 ## Installation instructions <a name="step0"></a>    
 ### Requirements
@@ -131,18 +135,24 @@ In this step, data are read from the raw data fodler `dataset`, they go through 
 
 ### Step 2: Setting test and train <a name="step2"></a>    
 Test and train data are assigned in this step and the `metadata_split.csv` file is geenrated.
-**code file corresponding to this step**: `step2_metadata_split.py`
+**code file corresponding to this step**: `step2_traintest_split.py`
 
 ### Step 3: Feature analysis and saving results <a name="step3"></a>    
-**code file corresponding to this step**: `step3_analysis_and_metadata_features.ipynb`
+**code file corresponding to this step**: `step3_analysis_and_results.py`
 
 ### Going through steps
 For step 1 use `featextract-env` anf for step 2 & step 3 use `featanalysis-env`. **Do not forget to alter the directories in each file based on the directories in your computer.** 
 
 For feature extraction in **step 1**, you need a folder of cardiomyocyte images in `.tif` format.
 
-For running step 2 (the train–test split), you also need a .csv file similar to [metadata_base.csv](#metadatabase), with at least a column named `name` and another column named `group_gnd`. In our case, we also had a column called `orig_folder`, which we used to decide the train and test samples. You can change this part if you want to use a different method to split the data(like random splot, for example). Just be careful: for the train set you don’t necessarily need the ground truth, but for the test set you do, so only select labeled samples for test.
+For running `step 2` (the train–test split), you also need a .csv file similar to [metadata_base.csv](#metadatabase), with at least a column named `name` and another column named `group_gnd`. In our case, we also had a column called `orig_folder`, which we used to decide the train and test samples. You can change this part if you want to use a different method to split the data(like random splot, for example). Just be careful: for the train set you don’t necessarily need the ground truth, but for the test set you do, so only select labeled samples for test.
 ```
+module load miniconda
+mamba activate featextract-env
+python3 step1_feature_extraction.py
+mamba activate featanalysis-env
+python3 step2_traintest_split.py
+python3 step3_analysis_and_results.py
 
 ```
 ## References  

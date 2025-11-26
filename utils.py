@@ -70,7 +70,6 @@ def predict_classes_train(features_scaled, features_pca, random_state=1, split_l
         predictions_relabeled = relabel_by_mean(features_pca[:, 0], predictions,
                                                 reverse=reverse, custom_order=custom_order)
 
-        print_classcounts(predictions_relabeled, features_title=features_title)
         return predictions_relabeled
 
     else:
@@ -145,7 +144,6 @@ def predict_classes_test(kmeans, tree, features_scaled, features_pca, random_sta
         # Insert relabeled predictions back into full array
         predictions_relabeled[mask] = predictions_relabeled_sliced
 
-        print_classcounts(predictions_relabeled, features_title=features_title)
         return predictions_relabeled
 
 def get_loworg_sarcasm(sample_ids, sarcasm_features_dir, thresh=0):
@@ -205,7 +203,7 @@ def relabel_by_mean(X, y, reverse=False, custom_order=None):
 #--------Visualization and evaluation functions-------
 #-----------------------------------------------------
 
-def plot_clusters(pca_fit, predictions, title='', saving_dir=None, label_map = {0: 'l', 1: 'm', 2: 'h'}):
+def plot_clusters(pca_fit, predictions, title='', saving_dir=None, dpi = 400, label_map = {0: 'l', 1: 'm', 2: 'h'}):
     ''' label_map-> Map cluster labels → short text labels '''
 
     # Define colors for each predicted class
@@ -242,7 +240,7 @@ def plot_clusters(pca_fit, predictions, title='', saving_dir=None, label_map = {
 
     # Save figure if path provided
     if saving_dir:
-        plt.savefig(saving_dir, dpi=400)
+        plt.savefig(saving_dir, dpi=dpi)
 
     plt.show()
 
@@ -312,7 +310,7 @@ def evaluate_from_confusion(cm, title, class_labels=(0, 1, 2)):
 
     return cm_df, overall, per_class
 
-def plot_pca_matches(features_pca, labels_gnd, labels_pred, title="Ground truth vs predicted labels", saving_dir = None):
+def plot_pca_matches(features_pca, labels_gnd, labels_pred, title="Ground truth vs predicted labels", saving_dir = None, dpi = 400):
     """
     Scatter PCA[:,0] vs PCA[:,1]. Green = y_true==y_pred, Red = mismatch.
     Works whether inputs are lists, numpy arrays, or pandas objects.
@@ -352,7 +350,7 @@ def plot_pca_matches(features_pca, labels_gnd, labels_pred, title="Ground truth 
     plt.tight_layout()
     # Save figure if path provided
     if saving_dir:
-        plt.savefig(saving_dir, dpi=400)
+        plt.savefig(saving_dir, dpi=dpi)
 
     plt.show()
 
@@ -400,10 +398,9 @@ def pick_random_per_pair(labelpairs_dict, seed=0):
     return out
 
 
-
 def plot_gndvspred(pair_key, sample_id, raw_folder_dir,
                    zdiscs_plot_thresh=0.1,
-                   label_map={0: 'low', 1: 'medium', 2: 'high'}):
+                   label_map={0: 'low', 1: 'medium', 2: 'high'}, saving_dir = None, dpi = 400):
 
     # Load raw image and z-discs
     raw_image = tifffile.imread(os.path.join(raw_folder_dir, f'{sample_id}.tif')).astype(np.float32)
@@ -434,3 +431,6 @@ def plot_gndvspred(pair_key, sample_id, raw_folder_dir,
     axes[2].imshow(zdiscs, cmap='gray')
     axes[2].set_title("Zdiscs")
     axes[2].axis("off")
+
+    if saving_dir:
+        plt.savefig(saving_dir, dpi = dpi)
