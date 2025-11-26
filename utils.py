@@ -286,8 +286,8 @@ def evaluate_from_confusion(cm, title, class_labels=(0, 1, 2)):
     per_class = pd.DataFrame({
         "precision": precision,
         "recall": recall,
-        "support_true": support,
-        "count_pred": pred_counts,
+        "true_counts": support,
+        "predicted_counts": pred_counts,
         "tp": tp
     }, index=labels)
 
