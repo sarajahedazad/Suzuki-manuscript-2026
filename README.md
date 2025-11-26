@@ -171,8 +171,16 @@ mamba activate featanalysis-env
 python3 step2_traintest_split.py
 python3 step3_fit_and_eval.py
 python3 step4_analyze_results.py
-
 ```
+**Note**: The file `results_visualization.ipynb` is the same as `step4_analyze_results.py`, except it does not save any results and is used only for visualization.  
+If you would like to open it as a Jupyter notebook in your browser, you may need to install Jupyter Notebook in your conda environment as well:
+```
+pip install jupyter
+```
+```
+jupyter notebook results_visualization.ipynb
+```
+
 ## References  
 - [SarcAsM GitHub](https://github.com/danihae/SarcAsM)
 - [SarcAsM bioRxiv](https://www.biorxiv.org/content/10.1101/2025.04.29.650605v1)
