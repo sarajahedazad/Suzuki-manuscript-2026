@@ -21,6 +21,10 @@ df = pd.read_csv(metadata_base_dir)
 # Make a copy
 df_new = df.copy()
 
+# You can change this part to assign train/test randomly, 
+# but be careful: ground truth (gnd) must be available for the test set, 
+# while it is not required for the training set.
+
 #---------------Define test folders-----------------
 test_folders = ["03_FN_P5D2", "04_VN_P5D2", "05_FN_Cilen100", "06_VN_Cilen100"]
 

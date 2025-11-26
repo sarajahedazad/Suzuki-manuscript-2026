@@ -8,7 +8,8 @@
 - [Workflow](#workflow)
     - [Step 1: Feature extraction](#step1)
     - [Step 2: Setting test and train](#step2)
-    - [Step 3: Feature analysis and saving results](#step3)
+    - [Step 3: Fitting training data and evaluating](#step3)
+    - [Step 4: Analyzing results](#step4)
 - [References](#references)
 
 ## Project background   <a name="background"></a>
@@ -74,12 +75,18 @@ This script reads the input dataset, runs feature-extraction for each sample, an
 ### `step2_traintest_split.py`   
 Creates a train/test split based on the metadata.
 This script loads the base metadata file (`metadata_base.csv`), assigns each sample to the train or test set (following predefined rules), and saves the updated metadata as `metadata_split.csv`.  
-### `step3_analysis_and_results.py`  
+### `step3_fit_and_eval.py`  
 A Jupyter notebook for analyzing the extracted features and generating the final results.
-It loads `metadata_split.csv` and the feature files, performs the analysis, creates visualizations, and saves outputs such as `metadata_features.csv` and various figures. 
+It loads `metadata_split.csv` and the feature files, performs the analysis, creates visualizations, and saves outputs such as `metadata_features.csv` and various figures.   
+### `step4_analyze_results.py`  
+
 ### `utils.py`  
 Contains helper functions used across different scripts in the project.
 ### `results_visualization.ipynb`
+
+### `PC_test.txt`  
+
+### `PC_train.txt`  
 
 ## Installation instructions <a name="step0"></a>    
 ### Requirements
@@ -137,8 +144,11 @@ In this step, data are read from the raw data fodler `dataset`, they go through 
 Test and train data are assigned in this step and the `metadata_split.csv` file is geenrated.
 **code file corresponding to this step**: `step2_traintest_split.py`
 
-### Step 3: Feature analysis and saving results <a name="step3"></a>    
-**code file corresponding to this step**: `step3_analysis_and_results.py`
+### Step 3: Fitting training data and evaluating <a name="step3"></a>    
+**code file corresponding to this step**: `step3_fit_and_eval.py`
+
+### Step 4: Analyzing results <a name="step4"></a>    
+**code file corresponding to this step**: `step4_analyze_results.py`
 
 ### Going through steps
 For step 1 use `featextract-env` anf for step 2 & step 3 use `featanalysis-env`. **Do not forget to alter the directories in each file based on the directories in your computer.** 
@@ -152,7 +162,8 @@ mamba activate featextract-env
 python3 step1_feature_extraction.py
 mamba activate featanalysis-env
 python3 step2_traintest_split.py
-python3 step3_analysis_and_results.py
+python3 step3_fit_and_eval.py
+python3 step4_analyze_results.py
 
 ```
 ## References  

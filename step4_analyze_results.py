@@ -3,14 +3,10 @@ import pandas as pd
 import os
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.preprocessing import Normalizer, StandardScaler
-from collections import Counter
-from sklearn.decomposition import PCA
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import ConfusionMatrixDisplay
-import tifffile
 from utils import get_selectedfeats_sarcasm, predict_classes_train, predict_classes_test
-from utils import get_loworg_sarcasm, plot_clusters, plot_pca_matches
+from utils import plot_clusters, plot_pca_matches
 from utils import evaluate_from_confusion, get_filenames_fromfolder
 from utils import samples_by_label_pair
 from utils import plot_gndvspred, pick_random_per_pair
@@ -52,10 +48,14 @@ os.makedirs( figures_folder_dir, exist_ok = True)
 textresults_folder_name = 'text_results'
 textresults_folder_dir = os.path.join(textresults_parent_dir, textresults_folder_name)
 
-#----Directories for metadata---
+#----Directories for metadata and txt files---
 
 # Path to metadata CSV file
 metadata_features_csv_dir  = os.path.join(csvfiles_folder_dir, 'metadata_features.csv')  
+
+# Txts
+PC_train_txt_dir = f'{textresults_folder_dir}/PC_train.txt'
+PC_test_txt_dir = f'{textresults_folder_dir}/PC_test.txt'
 
 #----Directories for analysis results---
 # Figures
@@ -70,10 +70,6 @@ def get_gndvspred_figure_dir( figures_folder_dir, pair_key):
 cm_test_csv_dir = f'{csvfiles_folder_dir}/cm_test.csv'
 perclass_test_csv_dir = f'{csvfiles_folder_dir}/perclass_test.csv'
 summary_test_csv_dir = f'{csvfiles_folder_dir}/summary_test.csv'
-
-# Txts
-PC_train_txt_dir = f'{textresults_folder_dir}/PC_train.txt'
-PC_test_txt_dir = f'{textresults_folder_dir}/PC_test.txt'
 
 print('Set up directories')
 
@@ -145,13 +141,3 @@ for pair_key, sample_id in random_samples_dict.items():
 cm_test_df.to_csv( cm_test_csv_dir)
 per_class_test.to_csv( perclass_test_csv_dir)
 overall_test.to_csv( summary_test_csv_dir )
-
-
-'''Text files'''
-np.savetxt(PC_train_txt_dir, train_features_pca)
-np.savetxt(PC_test_txt_dir, test_features_pca)
-
-
-
-
-

@@ -3,17 +3,10 @@ import pandas as pd
 import os
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.preprocessing import Normalizer, StandardScaler
-from collections import Counter
+from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import ConfusionMatrixDisplay
-import tifffile
 from utils import get_selectedfeats_sarcasm, predict_classes_train, predict_classes_test
-from utils import get_loworg_sarcasm, plot_clusters, plot_pca_matches
-from utils import evaluate_from_confusion, get_filenames_fromfolder
-from utils import samples_by_label_pair
-from utils import plot_gndvspred, pick_random_per_pair
+from utils import get_loworg_sarcasm, get_filenames_fromfolder
 
 '''----------Setting up parameters-----------'''
 SEED = 1
