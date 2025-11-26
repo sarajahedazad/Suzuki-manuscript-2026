@@ -15,14 +15,8 @@
 ## Project background   <a name="background"></a>
 Write about stem cells, heart cells, matureness immatureness? why it is important to classify them into three groups
 
-## Project roadmap  <a name="roadmap"></a> 
-Installing requirements.    
-raw_folder -> features folder    
-using a list of names, we set test and train   
-using a list of features, we select features for test and train   
-scaling and all   
-clustering 
-comparing the gnd and reality   
+## Project roadmap  <a name="roadmap"></a>   
+`Installing the required dependencies`↦`Extracting features`↦`Train and test split`↦`Fitting training data and evaluating`↦`Analyzing results`
 
 ## Description of folders <a name="folders"></a> 
 ### csv_files folder  
@@ -69,6 +63,13 @@ This file extends `metadata_split.csv` by adding prediction results and selected
 - `n_zbands`: Number of Z-bands   
 - `cell_mask_area`: Cell area [µm²]
 
+### `PC_train.txt`  
+A Principal Component Analysis (PCA) model (with the first 2 components) was fitted on the scaled training features, and the resulting transformed array is saved.
+ 
+### `PC_test.txt`  
+After scaling the test features using the train-fitted scaler and then applying the PCA fitted on the training data, the transformed test array is saved.
+`PC_train.txt` and `PC_test.txt` are used in visualizing clusters.
+
 ### `step1_feature_extraction.py`  
 Extracts structural features from the raw .tif images using the SarcAsM pipeline.
 This script reads the input dataset, runs feature-extraction for each sample, and saves the resulting feature files.   
@@ -84,9 +85,6 @@ It loads `metadata_split.csv` and the feature files, performs the analysis, crea
 Contains helper functions used across different scripts in the project.
 ### `results_visualization.ipynb`
 
-### `PC_test.txt`  
-
-### `PC_train.txt`  
 
 ## Installation instructions <a name="step0"></a>    
 ### Requirements
