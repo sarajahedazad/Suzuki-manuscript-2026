@@ -244,7 +244,7 @@ def plot_clusters(pca_fit, predictions, title='', saving_dir=None, dpi = 400, la
 
     plt.show()
 
-def evaluate_from_confusion(cm, title, cm_saving_dir = None, perclass_saving_dir = None, summary_saving_dir= None, class_labels=(0, 1, 2)):
+def evaluate_from_confusion(cm, title, class_labels=(0, 1, 2)):
     """
     Compute evaluation metrics from a multi-class confusion matrix.
     """
@@ -307,15 +307,6 @@ def evaluate_from_confusion(cm, title, cm_saving_dir = None, perclass_saving_dir
     print(f"  Macro precision: {macro_precision:.3f}  |  Macro recall: {macro_recall:.3f}")
     print(f"  Per-class precision: {fmt(precision)}")
     print(f"  Per-class recall:    {fmt(recall)}")
-
-    if cm_saving_dir:
-        cm_df.to_csv( cm_saving_dir)
-    
-    if perclass_saving_dir:
-        per_class.to_csv( perclass_saving_dir)
-
-    if summary_saving_dir:
-        overall.to_csv( summary_saving_dir )
 
     return cm_df, overall, per_class
 

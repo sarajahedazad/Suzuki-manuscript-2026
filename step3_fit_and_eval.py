@@ -29,7 +29,6 @@ include_lst = ['sarcomere_area_ratio', 'z_length_mean', 'n_zbands']
 #----Parent directories----
 dataset_parent_dir = '/projectnb/lejlab2/Sara/Second Project/kazuyas-data-project'
 csvfiles_parent_dir = ''
-figures_parent_dir = ''
 textresults_parent_dir = ''
 
 #----Folders---
@@ -49,39 +48,20 @@ print("Total number of data samples is:",
 csvfiles_folder_name = 'csv_files'
 csvfiles_folder_dir = os.path.join(csvfiles_parent_dir, csvfiles_folder_name)
 
-# Folder for figures
-figures_folder_name = 'figures'
-figures_folder_dir = os.path.join(figures_parent_dir, figures_folder_name)
-os.makedirs( figures_folder_dir, exist_ok = True)
-
 # Folder for text results
 textresults_folder_name = 'text_results'
 textresults_folder_dir = os.path.join(textresults_parent_dir, textresults_folder_name)
 os.makedirs( textresults_folder_dir, exist_ok = True)
 
 #----Directories for metadata---
-
 # Paths to metadata CSV files
 metadata_split_csv_dir = os.path.join(csvfiles_folder_dir, 'metadata_split.csv')
 metadata_features_csv_dir  = os.path.join(csvfiles_folder_dir, 'metadata_features.csv')  # will be created later
 
 #----Directories for analysis results---
-# Figures
-cluster_train_figure_dir = f'{figures_folder_dir}/clusters_train.png'
-cluster_test_figure_dir = f'{figures_folder_dir}/clusters_test.png'
-mismatches_test_figure_dir = f'{figures_folder_dir}/mismatch_test.png'
-cm_test_figure_dir = f'{figures_folder_dir}/cm_test.png'
-def get_gndvspred_figure_dir( figures_folder_dir, pair_key):
-      return f'{figures_folder_dir}/gnd{int(pair_key[0])}_pred{int(pair_key[1])}.png'
-
-# CSVs
-cm_test_csv_dir = 
-perclass_test_csv_dir = 
-summary_test_csv_dir = 
-
 # Txts
-PC_train_txt_dir =
-PC_test_txt_dir = 
+PC_train_txt_dir = f'{textresults_folder_dir}/PC_train.txt'
+PC_test_txt_dir = f'{textresults_folder_dir}/PC_test.txt'
 
 
 '''------Setting up test and train------------'''
@@ -126,6 +106,7 @@ train_pred, kmeans, tree = predict_classes_train(
     idxs_loworg=train_idxs_loworg_sarcasm, reverse=reverse
 )
 
+print( 'Fitted train data')
 '''-----Predictions on test data and full dataset------'''
 # test: select, scale, and project test features using train-fitted scaler/PCA 
 test_features = get_selectedfeats_sarcasm( test_names, sarcasm_features_dir, raw_folder_dir, include_lst )
@@ -144,47 +125,8 @@ allsamples_features_pca = pca.transform( allsamples_features_scaled )
 _, allsamples_idxs_loworg_sarcasm = get_loworg_sarcasm( allsamples_names, sarcasm_features_dir)
 allsamples_pred = predict_classes_test( kmeans, tree, allsamples_features_scaled, allsamples_features_pca, random_state = SEED, split_loworg = split_loworg,
                                idxs_loworg = allsamples_idxs_loworg_sarcasm, reverse=reverse )
-'''----------------------------------------------'''
-'''-------------------Results--------------------'''
-'''----------------------------------------------'''
-# Analysis: confusion matrix
-cm_test = confusion_matrix(test_labels, test_pred, labels=[0, 1, 2])
 
-'''Figures'''
-# Clusters
-plot_clusters( train_features_pca,  train_pred, title = 'Train: group prediction', saving_dir = cluster_train_figure_dir)
-plot_clusters( test_features_pca,  test_pred, title = 'Test: group prediction', saving_dir = cluster_test_figure_dir)
-
-# Mismatches
-plot_pca_matches( test_features_pca, np.array( test_labels ), test_pred, title="Test: ground truth vs predicted labels", saving_dir = mismatches_test_figure_dir )
-
-# confustion matrix
-class_names = ['l', 'm', 'h']
-disp = ConfusionMatrixDisplay(confusion_matrix=cm_test, display_labels=class_names)
-plt.figure()
-disp.plot()
-disp.ax_.set(xlabel='prediction', ylabel='ground truth')
-plt.title("Confusion matrix (test data)")
-plt.savefig(cm_test_figure_dir, dpi = 400)
-
-#------------------
-# Grouping test samples by (true_label, pred_label), include empty pairs as well
-labelpairs_dict = samples_by_label_pair(test_labels, test_pred, test_names, include_empty=True)
-
-# Picking one random sample ID from each (true, pred) pair
-random_samples_dict = pick_random_per_pair(labelpairs_dict, seed = SEED)
-
-# Plotting the chosen sample for each pair (or reporting if none exist)
-for pair_key, sample_id in random_samples_dict.items():
-    if sample_id:
-        plot_gndvspred(pair_key, sample_id, raw_folder_dir, saving_dir = get_gndvspred_figure_dir( figures_folder_dir, pair_key))
-    else:
-        print( f'No samples for {pair_key} key')
-
-'''CSV file'''
-# Results as csv files
-
-
+print( 'Prediction was done')
 #------------------metadata_features.csv----------------------
 # Additional features (beyond those used for prediction) are added here
 
@@ -227,11 +169,9 @@ df_updated['cell_mask_area'] = cell_mask_area_lst
 
 # Save final metadata CSV
 df_updated.to_csv(metadata_features_csv_dir, index=False)
+print('The updated metadata file was saved')
 
 '''Text files'''
-
-
-
-
-
-
+np.savetxt(PC_train_txt_dir, train_features_pca)
+np.savetxt(PC_test_txt_dir, test_features_pca)
+print('Text files were saved')
