@@ -23,24 +23,24 @@ This workflow allows us to categorize large sets of hiPSC-CM images according to
 `Installing the required dependencies`↦`Extracting features`↦`Train and test split`↦`Fitting training data and evaluating`↦`Analyzing results`
 
 ## Description of folders <a name="folders"></a> 
-`### csv_files`  
+### `csv_files` folder  
 This folder contains the metadata used in this project, stored as `.csv` files and also some results from test data evaluation.  
 
-`### figures`   
+### `figures` folder     
 Generated visual results are saved in this folder.
 
-`### text_results`
+### `text_results` folder     
 Contains files in `.txt` format from the results of `step3_fit_and_eval.py`. These data, alongside with the information in ` metadata_features.csv `, are used in `step4_analyze_results.py` for analysing results, and in `results_visualization.ipynb` for visualization of results.
 
-`### dataset folder` (not on GitHub)  
+### `dataset` folder (not on GitHub)   
 This folder contains the raw data.
 It includes `.tif` files for the raw images and additional folders named after each sample ID.
 The feature-extraction tool used in this project, **SarcAsM**, automatically creates a folder for each sample (named after the sample ID) and stores intermediate outputs such as `cell_mask.tif`, `mbands.tif`, `zbands.tif`, etc.
 
-- ### dataset_sarcasm_features folder
+### `dataset_sarcasm_features` folder
 This folder contains the extracted features from **SarcAsM**, saved as `.csv` files (one per sample).
 
-- ### dataset_abnormal_samples folder (not on GitHub) 
+### `dataset_abnormal_samples` folder (not on GitHub) 
 If an error occurs during feature extraction, a `.txt` file with the sample ID is stored here. Each file contains the error message for that sample. In case no error happens, this folder will be empty.
 
 
