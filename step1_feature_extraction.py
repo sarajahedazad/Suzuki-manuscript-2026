@@ -14,15 +14,17 @@ def get_filenames_fromfolder(repo_dir, file_format='.tif'):
             sample_names.append(name[:-len(file_format)])
     return sample_names
 #-----------------Setting up directories---------------
-parent_dir = '/projectnb/lejlab2/Sara/Second Project/kazuyas-data-project'
+raw_folder_parent_dir = '/projectnb/lejlab2/Sara/Second Project/kazuyas-data-project'
+features_folder_parent_dir = '/projectnb/lejlab2/Sara/Second Project/kazuyas-data-project'
+abnormalsamples_folder_parent_dir = '/projectnb/lejlab2/Sara/Second Project/kazuyas-data-project'
 input_folder_name = 'dataset'
-input_folder_dir = os.path.join( parent_dir, input_folder_name)
+input_folder_dir = os.path.join( raw_folder_parent_dir, input_folder_name)
 
 sample_names = get_filenames_fromfolder( input_folder_dir, file_format = '.tif' ) # List of all .tif samples to be processed
 output_folder_name = f'{input_folder_name}_sarcasm_features'
-output_folder_dir = os.path.join( parent_dir, output_folder_name)
+output_folder_dir = os.path.join( features_folder_parent_dir, output_folder_name)
 os.makedirs( output_folder_dir, exist_ok=True )
-abnormal_samples_dir = os.path.join( parent_dir, f'{input_folder_name}_abnormal_samples')
+abnormal_samples_dir = os.path.join( abnormalsamples_folder_parent_dir, f'{input_folder_name}_abnormal_samples')
 os.makedirs( abnormal_samples_dir, exist_ok = True)
 
 #--------------Extracting and saving features-----------------
