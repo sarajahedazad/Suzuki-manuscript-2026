@@ -3,10 +3,18 @@ from sarcasm import Structure
 import os
 import pandas as pd
 from sarcasm.export import Export 
-from utils import get_filenames_fromfolder
-
+#---------------------Functions-----------------------
+def get_filenames_fromfolder(repo_dir, file_format='.tif'):
+    # List files in folder and keep only those with the given extension
+    sample_names = []
+    all_names = os.listdir(repo_dir)
+    for name in all_names:
+        if name.endswith(file_format):
+            # Remove extension so only the base ID is returned
+            sample_names.append(name[:-len(file_format)])
+    return sample_names
 #-----------------Setting up directories---------------
-parent_dir = ''
+parent_dir = '/projectnb/lejlab2/Sara/Second Project/kazuyas-data-project'
 input_folder_name = 'dataset'
 input_folder_dir = os.path.join( parent_dir, input_folder_name)
 

@@ -3,7 +3,7 @@
 - [Project overview]( #overview )
 - [Project roadmap]( #roadmap )
 - [Description of folders](#folders)
-- [Description of files](#files)
+- [Description of key files](#files)
 - [Installation instructions](#step0)
 - [Workflow](#workflow)
     - [Step 1: Feature extraction](#step1)
@@ -15,7 +15,7 @@
 ## Project overview   <a name="overview"></a>
 Human induced pluripotent stem cell–derived cardiomyocytes (hiPSC-CMs) change significantly as they grow. Their internal structure varies across different stages of maturation. In this project, our goal is to group these cells into three categories: low, medium, and high organization, based on structural features extracted from their images.
 
-We used a deep-learning based open-source tool called SarcAsM to extract detailed structural features from each cell. After feature extraction, we applied K-means clustering to identify three groups in the data. Using the fitted K-means model and the extracted features, we then trained a decision tree to classify new samples into these groups.
+We used a deep-learning based open-source tool called [SarcAsM](https://github.com/danihae/SarcAsM) to extract detailed structural features from each cell. After feature extraction, we applied K-means clustering to identify three groups in the data. Using the fitted K-means model and the extracted features, we then trained a decision tree to classify new samples into these groups.
 
 This workflow allows us to categorize large sets of hiPSC-CM images according to their level of internal structural organization.
 
@@ -24,10 +24,10 @@ This workflow allows us to categorize large sets of hiPSC-CM images according to
 
 ## Description of folders <a name="folders"></a> 
 ### csv_files folder  
-This folder contains the metadata used in this project, stored as `.csv` files.  
+This folder contains the metadata used in this project, stored as `.csv` files and also some results from test data evaluation.  
 
 ### figures folder   
-Generated figures and visual results are saved in this folder.
+Generated visual results are saved in this folder.
 
 ### text_results folder
 Contains files in `.txt` format from the results of `step3_fit_and_eval.py`. These data, alongside with the information in ` metadata_features.csv `, are used in `step4_analyze_results.py` for analysing results, and in `results_visualization.ipynb` for visualization of results.
@@ -71,7 +71,7 @@ This file extends `metadata_split.csv` by adding prediction results and selected
 A Principal Component Analysis (PCA) model (with the first 2 components) was fitted on the scaled training features, and the resulting transformed array is saved.
  
 ### `PC_test.txt`  
-After scaling the test features using the train-fitted scaler and then applying the PCA fitted on the training data, the transformed test array is saved.
+After scaling the test features using the train-fitted scaler and then applying the PCA model that is fitted on the training data, the transformed test array is saved.
 `PC_train.txt` and `PC_test.txt` are used in visualizing clusters.
 
 ### `utils.py`  
@@ -98,7 +98,7 @@ This Jupyter notebook is used for visualizing the same results generated in Step
 ## Installation instructions <a name="step0"></a>    
 ### Requirements
 You’ll need **Miniconda** (or **Anaconda**) installed on your system.
-If you already have **Conda**, you can use it instead of **Miniconda** and replace all `mamba` commands below with `conda`.
+If you already have **Conda** set up, you can use that instead of **Miniconda**. Just replace all `mamba` commands below with `conda`.
   
 ### Environment setup
 Because of dependency version conflicts, two separate Conda/Miniconda environments were created for this project:  
@@ -163,10 +163,16 @@ For step 1 use `featextract-env` anf for step 2 & step 3 use `featanalysis-env`.
 For feature extraction in **step 1**, you need a folder of cardiomyocyte images in `.tif` format.
 
 For running `step 2` (the train–test split), you also need a .csv file similar to [metadata_base.csv](#metadatabase), with at least a column named `name` and another column named `group_gnd`. In our case, we also had a column called `orig_folder`, which we used to decide the train and test samples. You can change this part if you want to use a different method to split the data(like random splot, for example). Just be careful: for the train set you don’t necessarily need the ground truth, but for the test set you do, so only select labeled samples for test.
+
+**Feature extraction**
 ```
 module load miniconda
 mamba activate featextract-env
 python3 step1_feature_extraction.py
+```
+**Feature analysis**
+```
+module load miniconda
 mamba activate featanalysis-env
 python3 step2_traintest_split.py
 python3 step3_fit_and_eval.py
@@ -183,7 +189,6 @@ jupyter notebook results_visualization.ipynb
 
 ## References  
 - [SarcAsM GitHub](https://github.com/danihae/SarcAsM)
-- [SarcAsM bioRxiv](https://www.biorxiv.org/content/10.1101/2025.04.29.650605v1)
-- [ExKMC bioRxiv](https://github.com/navefr/ExKMC?tab=readme-ov-file)
+- [ExKMC GitHub](https://github.com/navefr/ExKMC?tab=readme-ov-file)
 
 
