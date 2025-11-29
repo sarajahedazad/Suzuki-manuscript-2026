@@ -23,16 +23,16 @@ This workflow allows us to categorize large sets of hiPSC-CM images according to
 `Installing the required dependencies`↦`Extracting features`↦`Train and test split`↦`Fitting training data and evaluating`↦`Analyzing results`
 
 ## Description of folders <a name="folders"></a> 
-- ### csv_files folder  
+`### csv_files`  
 This folder contains the metadata used in this project, stored as `.csv` files and also some results from test data evaluation.  
 
-- ### figures folder   
+`### figures`   
 Generated visual results are saved in this folder.
 
-- ### text_results folder
+`### text_results`
 Contains files in `.txt` format from the results of `step3_fit_and_eval.py`. These data, alongside with the information in ` metadata_features.csv `, are used in `step4_analyze_results.py` for analysing results, and in `results_visualization.ipynb` for visualization of results.
 
-- ### dataset folder (not on GitHub)  
+`### dataset folder` (not on GitHub)  
 This folder contains the raw data.
 It includes `.tif` files for the raw images and additional folders named after each sample ID.
 The feature-extraction tool used in this project, **SarcAsM**, automatically creates a folder for each sample (named after the sample ID) and stores intermediate outputs such as `cell_mask.tif`, `mbands.tif`, `zbands.tif`, etc.
