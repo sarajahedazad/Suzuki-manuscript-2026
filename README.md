@@ -13,7 +13,7 @@
 - [References](#references)
 
 ## Project overview   <a name="overview"></a>
-Human induced pluripotent stem cell–derived cardiomyocytes (hiPSC-CMs) change significantly as they grow. Their internal structure varies across different stages of maturation. In this project, our goal is to group these cells into three categories: low, medium, and high organization, based on structural features extracted from their images.
+Human induced pluripotent stem cell-derived cardiomyocytes (hiPSC-CMs) change significantly as they grow. Their internal structure varies across different stages of maturation. In this project, our goal is to group these cells into three categories: low, medium, and high organization, based on structural features extracted from their images.
 
 We used a deep-learning based open-source tool called [SarcAsM](https://github.com/danihae/SarcAsM) to extract detailed structural features from each cell. After feature extraction, we applied K-means clustering to identify three groups in the data. Using the fitted K-means model and the extracted features, we then trained a decision tree to classify new samples into these groups.
 
@@ -23,25 +23,25 @@ This workflow allows us to categorize large sets of hiPSC-CM images according to
 `Installing the required dependencies`↦`Extracting features`↦`Train and test split`↦`Fitting training data and evaluating`↦`Analyzing results`
 
 ## Description of folders <a name="folders"></a> 
-### csv_files folder  
+- ### csv_files folder  
 This folder contains the metadata used in this project, stored as `.csv` files and also some results from test data evaluation.  
 
-### figures folder   
+- ### figures folder   
 Generated visual results are saved in this folder.
 
-### text_results folder
+- ### text_results folder
 Contains files in `.txt` format from the results of `step3_fit_and_eval.py`. These data, alongside with the information in ` metadata_features.csv `, are used in `step4_analyze_results.py` for analysing results, and in `results_visualization.ipynb` for visualization of results.
 
-### dataset folder (not on GitHub)  
+- ### dataset folder (not on GitHub)  
 This folder contains the raw data.
 It includes `.tif` files for the raw images and additional folders named after each sample ID.
 The feature-extraction tool used in this project, **SarcAsM**, automatically creates a folder for each sample (named after the sample ID) and stores intermediate outputs such as `cell_mask.tif`, `mbands.tif`, `zbands.tif`, etc.
 
-### dataset_sarcasm_features folder (not on GitHub)   
+- ### dataset_sarcasm_features folder
 This folder contains the extracted features from **SarcAsM**, saved as `.csv` files (one per sample).
 
-### dataset_abnormal_samples folder (not on GitHub) 
-If an error occurs during feature extraction, a `.txt` file with the sample ID is stored here. Each file contains the error message for that sample.  
+- ### dataset_abnormal_samples folder (not on GitHub) 
+If an error occurs during feature extraction, a `.txt` file with the sample ID is stored here. Each file contains the error message for that sample. In case no error happens, this folder will be empty.
 
 
 ## Description of key files <a name="files"></a>    
@@ -178,7 +178,7 @@ python3 step2_traintest_split.py
 python3 step3_fit_and_eval.py
 python3 step4_analyze_results.py
 ```
-**Note**: The file `results_visualization.ipynb` is the same as `step4_analyze_results.py`, except it does not save any results and is used only for visualization.  
+**Note 1**: The file `results_visualization.ipynb` is the same as `step4_analyze_results.py`, except it does not save any results and is used only for visualization.  
 If you would like to open it as a Jupyter notebook in your browser, you may need to install Jupyter Notebook in your conda environment as well:
 ```
 pip install jupyter
@@ -186,6 +186,7 @@ pip install jupyter
 ```
 jupyter notebook results_visualization.ipynb
 ```
+**Note 2**: Depending on how the environment is set up, for example the SarcAsM version, the versions of its dependencies, etc, there can be subtle differences in the extracted features between runs.
 
 ## References  
 - [SarcAsM GitHub](https://github.com/danihae/SarcAsM)
