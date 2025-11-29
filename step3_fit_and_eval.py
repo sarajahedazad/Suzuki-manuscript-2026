@@ -20,18 +20,19 @@ include_lst = ['sarcomere_area_ratio', 'z_length_mean', 'n_zbands']
 
 '''------Setting up directories------------'''
 #----Parent directories----
-dataset_parent_dir = '/projectnb/lejlab2/Sara/Second Project/kazuyas-data-project'
+raw_folder_parent_dir = '/projectnb/lejlab2/Sara/Second Project/kazuyas-data-project'
+features_folder_parent_dir = ''
 csvfiles_parent_dir = ''
 textresults_parent_dir = ''
 
 #----Folders---
 # Raw data folder
 raw_folder_name = 'dataset'
-raw_folder_dir = os.path.join(dataset_parent_dir, raw_folder_name)
+raw_folder_dir = os.path.join(raw_folder_parent_dir, raw_folder_name)
 
 # Folder with per-sample sarcasm feature files
 sarcasm_features_folder_name = f'{raw_folder_name}_sarcasm_features'
-sarcasm_features_dir = os.path.join(dataset_parent_dir, sarcasm_features_folder_name)
+sarcasm_features_dir = os.path.join(features_folder_parent_dir, sarcasm_features_folder_name)
 
 # Count available samples based on feature files
 print("Total number of data samples is:",

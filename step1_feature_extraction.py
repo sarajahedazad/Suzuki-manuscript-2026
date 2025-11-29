@@ -15,7 +15,7 @@ def get_filenames_fromfolder(repo_dir, file_format='.tif'):
     return sample_names
 #-----------------Setting up directories---------------
 raw_folder_parent_dir = '/projectnb/lejlab2/Sara/Second Project/kazuyas-data-project'
-features_folder_parent_dir = '/projectnb/lejlab2/Sara/Second Project/kazuyas-data-project'
+features_folder_parent_dir = ''
 abnormalsamples_folder_parent_dir = '/projectnb/lejlab2/Sara/Second Project/kazuyas-data-project'
 input_folder_name = 'dataset'
 input_folder_dir = os.path.join( raw_folder_parent_dir, input_folder_name)
