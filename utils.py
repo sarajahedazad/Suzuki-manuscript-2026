@@ -204,8 +204,6 @@ def relabel_by_mean(X, y, reverse=False, custom_order=None):
 #-----------------------------------------------------
 
 def plot_clusters(pca_fit, predictions, title='', saving_dir=None, dpi = 400, label_map = {0: 'l', 1: 'm', 2: 'h'}):
-    ''' label_map-> Map cluster labels → short text labels '''
-
     # Define colors for each predicted class
     colors_dict = {
         "yellow": "#FEEE78",
@@ -245,10 +243,6 @@ def plot_clusters(pca_fit, predictions, title='', saving_dir=None, dpi = 400, la
     plt.show()
 
 def evaluate_from_confusion(cm, title, class_labels=(0, 1, 2)):
-    """
-    Compute evaluation metrics from a multi-class confusion matrix.
-    """
-
     # Accept confusion matrix as DataFrame or ndarray
     if isinstance(cm, pd.DataFrame):
         cm_values = cm.values
@@ -286,7 +280,7 @@ def evaluate_from_confusion(cm, title, class_labels=(0, 1, 2)):
     per_class = pd.DataFrame({
         "precision": precision,
         "recall": recall,
-        "true_counts": support,
+        "gnd_counts": support,
         "predicted_counts": pred_counts,
         "tp": tp
     }, index=labels)
@@ -391,7 +385,6 @@ def pick_random_per_pair(labelpairs_dict, seed=0):
     out = {}
     for key, samples in labelpairs_dict.items():
         if samples:
-            # NumPy can choose from a list of strings just fine
             out[key] = rng.choice(samples)
         else:
             out[key] = None

@@ -17,7 +17,7 @@ Human induced pluripotent stem cell-derived cardiomyocytes (hiPSC-CMs) change si
 
 We used a deep learning-based open-source tool called [SarcAsM](https://github.com/danihae/SarcAsM) to extract detailed structural features from each cell. After feature extraction, we applied K-means clustering to identify three groups in the data. Using the fitted K-means model and the extracted features, we then trained a decision tree to classify new samples into these groups.
 
-This workflow allows us to categorize large sets of hiPSC-CM images according to their level of internal structural organization.
+This workflow allows us to categorize sets of hiPSC-CM images according to their level of internal structural organization.
 
 ## Project roadmap  <a name="roadmap"></a>   
 `Installing the required dependencies`↦`Extracting features`↦`Train and test split`↦`Fitting training data and evaluating`↦`Analyzing results`
@@ -78,7 +78,7 @@ After scaling the test features using the train-fitted scaler and then applying 
 Contains helper functions used across different scripts in the project.
 
 ### `step1_feature_extraction.py`  
-Extracts structural features from the raw .tif images using the SarcAsM pipeline.
+Extracts structural features from the raw `.tif` images using the SarcAsM pipeline.
 This script reads the input dataset, runs feature-extraction for each sample, and saves the resulting feature files. 
 
 ### `step2_traintest_split.py`   
@@ -127,9 +127,9 @@ mamba install -y tifffile graphviz python-graphviz cython compilers
 pip install ExKMC --no-build-isolation
 ```
 **Note**: For deactivation of environments, use:   
-`
+```
 mamba deactivate
-`
+```  
 After creation of the first env, deactivate it and create the next. 
 ### Using the environment in VS code
 If you are using VS Code:
@@ -143,49 +143,49 @@ If you are using VS Code:
 ## Workflow
 
 ### Step 1: Feature extraction   <a name="step1"></a>    
-**input needed**:   
+**Input needed**:   
 - raw `.tif` files from the `dataset` folder (not on GitHub)   
 
-**code file corresponding to this step**:   
+**Code file corresponding to this step**:   
 - `step1_feature_extraction.py` 
   
-**generated files**:     
+**Generated files**:     
 - all features data (`.csv` files) in `dataset_sarcasm_features` folder
 - the intermediate SarcAsM outputs (such as `zbands.tif`, `mbands.tif`, `cell_mask.tif`, etc) stored in per-ID subfolders inside `dataset` folder (not on GitHub)
 
 ### Step 2: Train-test split <a name="step2"></a>    
-**input needed**:  
+**Input needed**:  
 - `metadata_base.csv`    
 
-**code file corresponding to this step**:  
+**Code file corresponding to this step**:  
 - `step2_traintest_split.py`   
 
-**generated files**:   
+**Generated files**:   
 - `metadata_split.csv` (in `csv_files` folder)   
 
 ### Step 3: Fitting training data and evaluating <a name="step3"></a> 
-**input needed**:  
+**Input needed**:  
 - all features data (`.csv` files) in `dataset_sarcasm_features` folder   
 - `metadata_split.csv` (in `csv_files` folder)  
 
-**code file corresponding to this step**:   
+**Code file corresponding to this step**:   
 - `step3_fit_and_eval.py`   
 
-**generated files**:   
+**Generated files**:   
 - all data in the `text_results` folder   
 - `metadata_features.csv` (in `csv_files` folder)   
 
 ### Step 4: Analyzing results <a name="step4"></a>   
-**input needed**:   
+**Input needed**:   
 - raw `.tif` files from the `dataset` folder (not on GitHub)   
 - the intermediate SarcAsM outputs (`zbands.tif`) stored in per-ID subfolders inside `dataset` folder (not on GitHub)   
 - the data in `text_results`   
 - `metadata_features.csv` (in `csv_files` folder)  
 
-**code file corresponding to this step**:     
+**Code file corresponding to this step**:     
 - `step4_analyze_results.py`   
 
-**generated files**:   
+**Generated files**:   
 - `cm_test.csv`(in `csv_files` folder)   
 - `perclass_test.csv` (in `csv_files` folder)  
 - `summary_test.csv` (in `csv_files` folder)   
@@ -196,7 +196,7 @@ For step 1 use `featextract-env` and for step 2 & step 3 use `featanalysis-env`.
 
 For feature extraction in **step 1**, you need a folder of cardiomyocyte images in `.tif` format.
 
-For running `step 2` (the train–test split), you also need a .csv file similar to [metadata_base.csv](#metadatabase), with at least a column named `name` and another column named `group_gnd`. In our case, we also had a column called `orig_folder`, which we used to decide the train and test samples. You can change this part if you want to use a different method to split the data(like random split, for example). Just be careful: For the train set you don’t necessarily need ground-truth labels, but for the test set you do. Therefore, only select labeled samples for the test set.
+For running **step 2** (the train–test split), you also need a `.csv` file similar to [metadata_base.csv](#metadatabase), with at least a column named `name` and another column named `group_gnd`. In our case, we also had a column called `orig_folder`, which we used to decide the train and test samples. You can change this part if you want to use a different method to split the data(like random split, for example). Just be careful: For the train set you don’t necessarily need ground-truth labels, but for the test set you do. Therefore, only select labeled samples for the test set.
 
 **Feature extraction**
 ```
