@@ -144,21 +144,48 @@ If you are using VS Code:
 ## Workflow
 
 ### Step 1: Feature extraction   <a name="step1"></a>    
-In this step, data are read from the raw data fodler `dataset`, they go through feature extraction in csv . In this step, the csv file `metadata_base.csv` is used to get the names of the files.
-**code file corresponding to this step**: `step1_feature_extraction.py`
+**input needed**:   
+- raw `.tif` files from the `dataset` folder (not on GitHub)
+**code file corresponding to this step**:   
+- `step1_feature_extraction.py`
+**generated files**:    
+- all features data (`.csv` files) in `dataset_sarcasm_features` folder
+- the intermediate SarcAsM outputs (such as `zbands.tif`, `mbands.tif`, `cell_mask.tif`, etc) stored in per-ID subfolders inside `dataset` folder (not on GitHub)
 
 ### Step 2: Setting test and train <a name="step2"></a>    
-Test and train data are assigned in this step and the `metadata_split.csv` file is geenrated.
-**code file corresponding to this step**: `step2_traintest_split.py`
+**input needed**:  
+- `metadata_base.csv` 
+**code file corresponding to this step**:   
+- `step2_traintest_split.py`
+**generated files**:   
+- `metadata_split.csv` (in `csv_files` folder)
 
-### Step 3: Fitting training data and evaluating <a name="step3"></a>    
-**code file corresponding to this step**: `step3_fit_and_eval.py`
+### Step 3: Fitting training data and evaluating <a name="step3"></a> 
+**input needed**:  
+- all features data (`.csv` files) in `dataset_sarcasm_features` folder
+- `metadata_split.csv` (in `csv_files` folder)
+**code file corresponding to this step**:  
+- `step3_fit_and_eval.py`
+**generated files**:  
+- all data in the `text_results` folder
+- `metadata_features.csv` (in `csv_files` folder)
 
-### Step 4: Analyzing results <a name="step4"></a>    
-**code file corresponding to this step**: `step4_analyze_results.py`
+### Step 4: Analyzing results <a name="step4"></a>
+**input needed**:   
+- raw `.tif` files from the `dataset` folder (not on GitHub)
+- the intermediate SarcAsM outputs (`zbands.tif`) stored in per-ID subfolders inside `dataset` folder (not on GitHub)
+- the data in `text_results`
+- `metadata_features.csv` (in `csv_files` folder)   
+**code file corresponding to this step**:  
+- `step4_analyze_results.py`  
+**generated files**: 
+- `cm_test.csv`(in `csv_files` folder)  
+- `perclass_test.csv` (in `csv_files` folder)
+- `summary_test.csv` (in `csv_files` folder)  
+- all files in `figures` folder
 
 ### Going through steps
-For step 1 use `featextract-env` anf for step 2 & step 3 use `featanalysis-env`. **Do not forget to alter the directories in each file based on the directories in your computer.** 
+For step 1 use `featextract-env` and for step 2 & step 3 use `featanalysis-env`. **Do not forget to alter the directories in each file based on the directories in your computer.** 
 
 For feature extraction in **step 1**, you need a folder of cardiomyocyte images in `.tif` format.
 

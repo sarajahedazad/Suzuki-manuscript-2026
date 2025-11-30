@@ -28,7 +28,6 @@ textresults_parent_dir = ''
 #----Folders---
 # Raw data folder
 raw_folder_name = 'dataset'
-raw_folder_dir = os.path.join(raw_folder_parent_dir, raw_folder_name)
 
 # Folder with per-sample sarcasm feature files
 sarcasm_features_folder_name = f'{raw_folder_name}_sarcasm_features'
@@ -82,8 +81,7 @@ _, allsamples_idxs_loworg_sarcasm = get_loworg_sarcasm(allsamples_names, sarcasm
 
 '''---------Fitting train-----------'''
 # Train: selected features
-train_features = get_selectedfeats_sarcasm(train_names, sarcasm_features_dir,
-                                           raw_folder_dir, include_lst)
+train_features = get_selectedfeats_sarcasm(train_names, sarcasm_features_dir, include_lst)
 
 # Scale train features
 scaler = StandardScaler()
@@ -103,7 +101,7 @@ train_pred, kmeans, tree = predict_classes_train(
 print( 'Fitted train data')
 '''-----Predictions on test data and full dataset------'''
 # test: select, scale, and project test features using train-fitted scaler/PCA 
-test_features = get_selectedfeats_sarcasm( test_names, sarcasm_features_dir, raw_folder_dir, include_lst )
+test_features = get_selectedfeats_sarcasm( test_names, sarcasm_features_dir, include_lst )
 test_features_scaled = scaler.transform(test_features)
 test_features_pca = pca.transform( test_features_scaled )
 
@@ -112,7 +110,7 @@ test_pred = predict_classes_test( tree, test_features_scaled, test_features_pca,
 
 # all samples
 allsamples_names_lst =  allsamples_names 
-allsamples_features = get_selectedfeats_sarcasm( allsamples_names, sarcasm_features_dir, raw_folder_dir, include_lst )
+allsamples_features = get_selectedfeats_sarcasm( allsamples_names, sarcasm_features_dir, include_lst )
 allsamples_features_scaled = scaler.transform(allsamples_features)
 allsamples_features_pca = pca.transform( allsamples_features_scaled )
 

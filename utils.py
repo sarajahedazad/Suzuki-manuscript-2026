@@ -28,7 +28,7 @@ def print_classcounts(predictions, features_title=''):
     print(f'class counts {features_title}:', Counter(predictions))
 
 
-def get_selectedfeats_sarcasm_single(sample_id, sarcasm_features_dir, raw_folder_dir, include_lst):
+def get_selectedfeats_sarcasm_single(sample_id, sarcasm_features_dir, include_lst):
     # Load per-sample feature file
     df_file_dir = os.path.join(sarcasm_features_dir, f'{sample_id}_features.csv')
     df = pd.read_csv(df_file_dir)
@@ -41,12 +41,12 @@ def get_selectedfeats_sarcasm_single(sample_id, sarcasm_features_dir, raw_folder
     return feats
 
 
-def get_selectedfeats_sarcasm(sample_ids, sarcasm_features_dir, raw_folder_dir, include_lst):
+def get_selectedfeats_sarcasm(sample_ids, sarcasm_features_dir, include_lst):
     # Collect selected features for all samples
     feats_selected = []
     for sample_id in sample_ids:
         feats_selected.append(
-            get_selectedfeats_sarcasm_single(sample_id, sarcasm_features_dir, raw_folder_dir, include_lst)
+            get_selectedfeats_sarcasm_single(sample_id, sarcasm_features_dir, include_lst)
         )
     return feats_selected
 
