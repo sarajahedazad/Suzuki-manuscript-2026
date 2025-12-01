@@ -52,7 +52,7 @@ for i, sample_name in enumerate( sample_names ):
         sarcdict = Export.get_structure_dict(sarc)
 
         all_features_lst = sarcdict.keys()
-        included_features_lst = list( set(all_features_lst) - set(excluded_features_lst) ) # Keeping only the features we want to save
+        included_features_lst = sorted( list( set(all_features_lst) - set(excluded_features_lst) ) ) # Keeping only the features we want to save
 
         features_dict = {}
         for included_features in included_features_lst:
