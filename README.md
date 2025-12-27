@@ -50,7 +50,7 @@ This file contains basic information about all samples.
 **Columns**:  
 - `name`: names of samples  
 - `group_gnd`: 0, 1, 2 , NaN (ground truth. In case the data is not labeled, it will be NaN.)  
-- `orig_folder`: 01_FN, 02_VN, 03_FN_P5D2, 04_VN_P5D2, 05_FN_Cilen100, 06_VN_Cilen100, old_data, old_data_unlabeled, data_nov (This column indicates the folder to which the data originally belongs)
+- `orig_folder`: 01_FN, 02_VN, 03_FN_P5D2, 04_VN_P5D2, 05_FN_Cilen100, 06_VN_Cilen100, old_data, old_data_unlabeled, data_nov, crop_fixed (This column indicates the folder to which the data originally belongs)
 - `status`: labeled, unlabeled (whether the ground truth is provided or not)   
 ### ` metadata_split.csv ` <a name="metadatasplit"></a>    
 This file includes all columns from `metadata_base.csv`, plus an additional column defining the train/test split.   
