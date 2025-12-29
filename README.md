@@ -204,6 +204,7 @@ module load miniconda
 mamba activate featextract-env
 python3 step1_feature_extraction.py
 ```
+**Note:** If you are using a GPU to extract features, you need to make sure that the GPU is compatible with the PyTorch version used in the Sarc-AsM version you are installing.
 **Feature analysis**
 ```
 module load miniconda
