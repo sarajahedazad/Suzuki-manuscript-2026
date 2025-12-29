@@ -221,7 +221,7 @@ pip install jupyter
 ```
 jupyter notebook results_visualization.ipynb
 ```
-**Note 2**: Depending on how the environment is set up, for example the SarcAsM version, the versions of its dependencies, etc., there can be subtle differences in the extracted features between runs.
+**Note 2**: Depending on how the environment is set up, for example the SarcAsM version, the versions of its dependencies, and whether a GPU or CPU is used for feature extraction, there can be subtle differences in the extracted features between runs.
 
 ## References  
 - [SarcAsM GitHub](https://github.com/danihae/SarcAsM)
