@@ -214,6 +214,7 @@ python3 step2_traintest_split.py
 python3 step3_fit_and_eval.py
 python3 step4_analyze_results.py
 ```
+## Notes
 **Note 1**: The file `results_visualization.ipynb` performs the same analyses as `step4_analyze_results.py`, but it does not save any results and is only used for visualization. 
 If you would like to open it as a Jupyter notebook in your browser, you may need to install Jupyter Notebook in your conda environment as well:
 ```
@@ -223,6 +224,8 @@ pip install jupyter
 jupyter notebook results_visualization.ipynb
 ```
 **Note 2**: Depending on how the environment is set up, for example the SarcAsM version, the versions of its dependencies, and whether a GPU or CPU is used for feature extraction, there can be subtle differences in the extracted features between runs.
+
+**Note 3**: In some scripts, parent directories are defined as `''` (empty string), assuming the working directory is the same as where the scripts reside. These can be changed to any desired path.
 
 ## References  
 - [SarcAsM GitHub](https://github.com/danihae/SarcAsM)
