@@ -66,6 +66,7 @@ This file extends `metadata_split.csv` by adding prediction results and selected
 - `z_length_mean`: Mean Z-band length [µm]   
 - `n_zbands`: Number of Z-bands   
 - `cell_mask_area`: Cell area [µm²]
+**Note**: only three of these features `sarcomere_area_ratio`, `z_length_mean` and `n_zbands` are used for the clustering process.
 
 ### `PC_train.txt`  
 A Principal Component Analysis (PCA) model (with the first 2 components) is fitted on the scaled training features, and the resulting transformed array is saved.

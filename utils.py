@@ -70,7 +70,7 @@ def predict_classes_train(features_scaled, features_pca, random_state=1, split_l
         predictions_relabeled = relabel_by_mean(features_pca[:, 0], predictions,
                                                 reverse=reverse, custom_order=custom_order)
 
-        return predictions_relabeled
+        return predictions_relabeled, kmeans, tree
 
     else:
         if idxs_loworg is None:
